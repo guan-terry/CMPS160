@@ -23,7 +23,7 @@ function main() {
 
   var triangleButton = document.getElementById("triangleButton");
   triangleButton.onclick = function() {
-
+    inputHandler.shapeObject = 1;
   }
   // Initialize shader
   shader = new Shader(gl, ASG1_VSHADER, ASG1_FSHADER);
