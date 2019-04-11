@@ -11,10 +11,10 @@ function main() {
     console.log("Failed to get WebGL rendering context.");
     return;
   }
-
+  var shape = 1;
   // Initialize the scene
   var scene = new Scene();
-  var inputHandler = new InputHandler(canvas, scene);
+  var inputHandler = new InputHandler(canvas, scene, shape);
 
   var clearCanvas = document.getElementById("clearCanvas");
   clearCanvas.onclick = function() {
@@ -23,7 +23,7 @@ function main() {
 
   var triangleButton = document.getElementById("triangleButton");
   triangleButton.onclick = function() {
-    
+
   }
   // Initialize shader
   shader = new Shader(gl, ASG1_VSHADER, ASG1_FSHADER);

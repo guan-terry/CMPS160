@@ -10,9 +10,10 @@ class InputHandler {
     /**
      * Initializes the event handeling functions within the program.
      */
-    constructor(canvas, scene) {
+    constructor(canvas, scene, shapeObject) {
       this.canvas = canvas;
       this.scene = scene;
+      this.shapeObject = shapeObject;
 
       _inputHandler = this;
 
@@ -34,8 +35,9 @@ class InputHandler {
         var r = sliderRed.value;
         var g = sliderGreen.value;
         var b = sliderBlue.value;
-        console.log("input.js red = " + r);
-        var shape = new Triangle(shader, ev.clientX, ev.clientY, r, g, b);
+        if (this.shapeObject == 1) {
+          var shape = new Triangle(shader, ev.clientX, ev.clientY, r, g, b);
+        }
         this.scene.addGeometry(shape);
     }
 }
