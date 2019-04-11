@@ -20,6 +20,11 @@ function main() {
   clearCanvas.onclick = function() {
     scene.clearGeometries();
   }
+
+  var triangleButton = document.getElementById("triangleButton");
+  triangleButton.onclick = function() {
+    
+  }
   // Initialize shader
   shader = new Shader(gl, ASG1_VSHADER, ASG1_FSHADER);
 
