@@ -17,51 +17,25 @@ class InputHandler {
       this.isMouseDown = false;
 
       _inputHandler = this;
-
       // Mouse Events
-      //this.canvas.onmousedown = function(ev) { _inputHandler.click(ev) };
-      this.canvas.onmousedown = function(ev) { _inputHandler.mouseDown(ev)};
-      this.canvas.onmouseup = function(ev) { _inputHandler.mouseUp(ev)};
-    }
-
-    mouseUp(ev) {
-      console.log("MouseUP ran");
-      this.isMouseDown = false;
-    }
-
-    mouseDown(ev) {
-      this.isMouseDown = true;
-      //this.canvas.onmouseup = function(ev) { this.mouseUp(ev)};
-      if(this.isMouseDown) {
-        setTimeout(this.mouseDown(ev), 1000);
-        this.drag(ev);
-      }
-    }
-
-    drag(ev) {
-        var sliderRed = document.getElementById("rangeRed");
-        var sliderGreen = document.getElementById("rangeGreen");
-        var sliderBlue = document.getElementById("rangeBlue");
-        var r = sliderRed.value;
-        var g = sliderGreen.value;
-        var b = sliderBlue.value;
-        var segCount = document.getElementById("segCount");
-        var circlePointNumber = segCount.value;
-        
-        if (this.shapeObject == 1) {
-          var shape = new Triangle(shader, ev.clientX, ev.clientY, r, g, b);
-        } else if(this.shapeObject == 2) {
-          var shape = new Square(shader, ev.clientX, ev.clientY, r, g, b);
-        } else {
-          var shape = new Circle(shader, ev.clientX, ev.clientY, circlePointNumber, r, g, b);
+      this.canvas.onmousedown = function(ev) { 
+        _inputHandler.drag(ev);
+        this.isMouseDown = true;
+      };
+      this.canvas.onmousemove = function(ev) { 
+        if(this.isMouseDown){
+          _inputHandler.drag(ev);
         }
-
-        this.scene.addGeometry(shape);      
+      }; 
+      this.canvas.onmouseup = function() { 
+        this.isMouseDown=false;
+      };
     }
+
     /**
      * Function called upon mouse click.
      */
-    click(ev) {
+    drag(ev) {
         // Print x,y coordinates.
         //console.log(ev.clientX, ev.clientY);
 
@@ -73,13 +47,15 @@ class InputHandler {
         var b = sliderBlue.value;
         var segCount = document.getElementById("segCount");
         var circlePointNumber = segCount.value;
+        var shapeSize = document.getElementById("shapeSlider");
+        var shapeMultiplier = shapeSize.value;
         
         if (this.shapeObject == 1) {
-          var shape = new Triangle(shader, ev.clientX, ev.clientY, r, g, b);
+          var shape = new Triangle(shader, ev.clientX, ev.clientY, r, g, b, shapeMultiplier);
         } else if(this.shapeObject == 2) {
-          var shape = new Square(shader, ev.clientX, ev.clientY, r, g, b);
+          var shape = new Square(shader, ev.clientX, ev.clientY, r, g, b, shapeMultiplier);
         } else {
-          var shape = new Circle(shader, ev.clientX, ev.clientY, circlePointNumber, r, g, b);
+          var shape = new Circle(shader, ev.clientX, ev.clientY, circlePointNumber, r, g, b, shapeMultiplier);
         }
 
         this.scene.addGeometry(shape);
