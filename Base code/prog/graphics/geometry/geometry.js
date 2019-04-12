@@ -20,7 +20,7 @@ class Geometry {
    * A callback used to modify a geometry every frame (60 typically).
    */
   render() {
-    return
+    renderer.changeDrawingMode("gl.TRIANGLE_FAN");
   }
 
   /**

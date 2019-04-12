@@ -18,6 +18,7 @@ class Renderer {
         this.gl = gl;
         this.scene = scene;
         this.camera = camera;
+        this.drawingMode = this.gl.TRIANGLES;
 
         this.initGLSLBuffers();
 
@@ -164,6 +165,17 @@ class Renderer {
      * @param {Integer} pointCount The amount of vertices being drawn from the buffer.
      */
     drawBuffer(indicesLength) {
-        this.gl.drawElements(this.gl.TRIANGLE_FAN, indicesLength, this.gl.UNSIGNED_SHORT, 0);
+        this.gl.drawElements(this.drawingMode, indicesLength, this.gl.UNSIGNED_SHORT, 0);
+    }
+
+    changeDrawingMode(value) {
+      switch (value) {
+        case "gl.TRIANGLES":
+          this.drawingMode = this.gl.TRIANGLES;
+          break;
+        case "gl.TRIANGLE_FAN":
+          this.drawingMode = this.gl.TRIANGLE_FAN;
+
+      }
     }
 }
