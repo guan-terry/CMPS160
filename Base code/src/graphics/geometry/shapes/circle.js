@@ -27,7 +27,7 @@ class Circle extends Geometry {
 
   generateCircleVertices(xPos, yPos, pointVal, redVal, greenVal, blueVal) {
       var vertices = []
-      var size = 5;
+      var size = 7;
       //console.log("xPos is: " + xPos);
       //console.log("yPos is: " + yPos);
       var rad = 0;

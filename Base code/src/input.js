@@ -19,10 +19,45 @@ class InputHandler {
       _inputHandler = this;
 
       // Mouse Events
-      this.canvas.onmousedown = function(ev) { _inputHandler.click(ev) };
-//      this.canvas.onmousedown = function(ev) { _inputHandler.mouseup(ev)};
+      //this.canvas.onmousedown = function(ev) { _inputHandler.click(ev) };
+      this.canvas.onmousedown = function(ev) { _inputHandler.mouseDown(ev)};
+      this.canvas.onmouseup = function(ev) { _inputHandler.mouseUp(ev)};
     }
 
+    mouseUp(ev) {
+      console.log("MouseUP ran");
+      this.isMouseDown = false;
+    }
+
+    mouseDown(ev) {
+      this.isMouseDown = true;
+      //this.canvas.onmouseup = function(ev) { this.mouseUp(ev)};
+      if(this.isMouseDown) {
+        setTimeout(this.mouseDown(ev), 1000);
+        this.drag(ev);
+      }
+    }
+
+    drag(ev) {
+        var sliderRed = document.getElementById("rangeRed");
+        var sliderGreen = document.getElementById("rangeGreen");
+        var sliderBlue = document.getElementById("rangeBlue");
+        var r = sliderRed.value;
+        var g = sliderGreen.value;
+        var b = sliderBlue.value;
+        var segCount = document.getElementById("segCount");
+        var circlePointNumber = segCount.value;
+        
+        if (this.shapeObject == 1) {
+          var shape = new Triangle(shader, ev.clientX, ev.clientY, r, g, b);
+        } else if(this.shapeObject == 2) {
+          var shape = new Square(shader, ev.clientX, ev.clientY, r, g, b);
+        } else {
+          var shape = new Circle(shader, ev.clientX, ev.clientY, circlePointNumber, r, g, b);
+        }
+
+        this.scene.addGeometry(shape);      
+    }
     /**
      * Function called upon mouse click.
      */
@@ -38,6 +73,7 @@ class InputHandler {
         var b = sliderBlue.value;
         var segCount = document.getElementById("segCount");
         var circlePointNumber = segCount.value;
+        
         if (this.shapeObject == 1) {
           var shape = new Triangle(shader, ev.clientX, ev.clientY, r, g, b);
         } else if(this.shapeObject == 2) {
@@ -45,6 +81,7 @@ class InputHandler {
         } else {
           var shape = new Circle(shader, ev.clientX, ev.clientY, circlePointNumber, r, g, b);
         }
+
         this.scene.addGeometry(shape);
     }
 
