@@ -30,8 +30,8 @@ class Triangle extends Geometry {
       console.log("xPos is: " + xPos);
       console.log("yPos is: " + yPos);
       var vertex1 = new Vertex( xPos, yPos+0.135, 0.0, redVal, greenVal, blueVal);
-      var vertex2 = new Vertex( xPos-0.135 , yPos-0.135, 0.0, redVal, greenVal, blueVal);
-      var vertex3 = new Vertex( xPos + 0.135,  yPos - 0.135, 0.0, redVal, greenVal, blueVal);;
+      var vertex2 = new Vertex( xPos-0.135, yPos-0.135, 0.0, redVal, greenVal, blueVal);
+      var vertex3 = new Vertex( xPos+0.135, yPos - 0.135, 0.0, redVal, greenVal, blueVal);;
 
       vertices.push(vertex1);
       vertices.push(vertex2);

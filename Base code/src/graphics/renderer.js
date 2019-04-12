@@ -57,8 +57,9 @@ class Renderer {
             // Draw geometry
             var geometry = this.scene.geometries[i];
             this.sendVertexDataToGLSL(geometry.data, geometry.dataCounts, geometry.shader);
+            //console.log(geometry.data);
             this.sendIndicesToGLSL(geometry.indices);
-            this.drawBuffer(geometry.indices.length)
+            this.drawBuffer(geometry.indices.length);
         }
     }
 
@@ -163,6 +164,6 @@ class Renderer {
      * @param {Integer} pointCount The amount of vertices being drawn from the buffer.
      */
     drawBuffer(indicesLength) {
-        this.gl.drawElements(this.gl.TRIANGLES, indicesLength, this.gl.UNSIGNED_SHORT, 0);
+        this.gl.drawElements(this.gl.TRIANGLE_FAN, indicesLength, this.gl.UNSIGNED_SHORT, 0);
     }
 }

@@ -14,13 +14,14 @@ class InputHandler {
       this.canvas = canvas;
       this.scene = scene;
       this.shapeObject = shapeObject;
+      this.isMouseDown = false;
 
       _inputHandler = this;
 
       // Mouse Events
       this.canvas.onmousedown = function(ev) { _inputHandler.click(ev) };
+//      this.canvas.onmousedown = function(ev) { _inputHandler.mouseup(ev)};
     }
-
 
     /**
      * Function called upon mouse click.
@@ -35,9 +36,17 @@ class InputHandler {
         var r = sliderRed.value;
         var g = sliderGreen.value;
         var b = sliderBlue.value;
+        var segCount = document.getElementById("segCount");
+        var circlePointNumber = segCount.value;
         if (this.shapeObject == 1) {
           var shape = new Triangle(shader, ev.clientX, ev.clientY, r, g, b);
+        } else if(this.shapeObject == 2) {
+          var shape = new Square(shader, ev.clientX, ev.clientY, r, g, b);
+        } else {
+          var shape = new Circle(shader, ev.clientX, ev.clientY, circlePointNumber, r, g, b);
         }
         this.scene.addGeometry(shape);
     }
+
+
 }

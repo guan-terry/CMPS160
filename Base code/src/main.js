@@ -25,6 +25,14 @@ function main() {
   triangleButton.onclick = function() {
     inputHandler.shapeObject = 1;
   }
+  var squareButton = document.getElementById("squareButton");
+  squareButton.onclick = function() {
+    inputHandler.shapeObject = 2;
+  }
+  var circleButton = document.getElementById("circleButton");
+  circleButton.onclick = function() {
+    inputHandler.shapeObject = 3;
+  }
   // Initialize shader
   shader = new Shader(gl, ASG1_VSHADER, ASG1_FSHADER);
 

@@ -29,8 +29,11 @@ class Geometry {
    */
   interleaveVertices() {
         var interleavedData = interleaveVertexData(this.vertices);
+//        console.log(interleavedData);
         this.data       = interleavedData[0];
         this.indices    = interleavedData[1];
+        //console.log(this.data);
         this.dataCounts = interleavedData[2];
+        //console.log(this.data);
   }
 }
