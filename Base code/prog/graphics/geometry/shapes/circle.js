@@ -14,7 +14,7 @@ class Circle extends Geometry {
    */
   constructor(shader,xPos, yPos, circlePointNumber, redVal, greenVal, blueVal, sizeMultiplier) {
       super(shader);
-      console.log(xPos, yPos);
+      //console.log(xPos, yPos);
       var xVal = (xPos-200)/200;  
       var yVal = ((yPos-200)/200) * -1;
 
@@ -31,22 +31,25 @@ class Circle extends Geometry {
       //console.log("xPos is: " + xPos);
       //console.log("yPos is: " + yPos);
       var rad = 0;
-      vertices.push(new Vertex(xPos, yPos, 0, redVal, greenVal, blueVal));
       var circlePoints = (2*Math.PI/pointVal);
       //console.log("circle points is: " + circlePoints);
       for(var i = 0; i <= pointVal; i++) {
         //console.log("rad is: " + rad);
         var x = (Math.cos(rad)/size) + xPos;
         var y = (Math.sin(rad)/size) + yPos;
-        rad = (rad + circlePoints);
         var vertexPoint = new Vertex(x, y, 0, redVal, greenVal, blueVal);
-        console.log(x,y);
+        rad = (rad + circlePoints);
+        //console.log(x,y);
+        x = (Math.cos(rad)/size) + xPos;
+        y = (Math.sin(rad)/size) + yPos;
+        vertices.push(new Vertex(xPos, yPos, 0, redVal, greenVal, blueVal));
+        vertices.push(new Vertex(x, y, 0, redVal, greenVal, blueVal));
         vertices.push(vertexPoint);
       }
-      console.log(vertices);
+      //console.log(vertices);
 
 
-      console.log(vertices);
+      //console.log(vertices);
       return vertices;
   }
 }
