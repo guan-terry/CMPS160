@@ -15,26 +15,31 @@ class movingCircles extends Geometry {
   constructor(shader,xPos, yPos, circlePointNumber, redVal, greenVal, blueVal, sizeMultiplier) {
       super(shader);
       //console.log(xPos, yPos);
-      var xVal = (xPos-200)/200;
-      var yVal = ((yPos-200)/200) * -1;
+      this.xVal = (xPos-200)/200;
+      this.yVal = ((yPos-200)/200) * -1;
+      this.randomMovementTime = (Math.random() * 25) + 25;
       this.movement = 0;
-      this.movementSideways = 0;
-      this.movementOrigin = 0;
 
-      this.vertices = this.generateCircleVertices(xVal, yVal, circlePointNumber, redVal, greenVal, blueVal, sizeMultiplier);
+
+      this.vertices = this.generateCircleVertices(this.xVal, this.yVal, circlePointNumber, redVal, greenVal, blueVal, sizeMultiplier);
       this.faces = {0: this.vertices};
-      var randomMovementX = Math.random()/10;
-      var randomMovementY = Math.random()/10;
+      var randomNegX = Math.random();
+      if (randomNegX > .5) {
+        randomNegX = -1;
+      } else {
+        randomNegX = 1;
+      }
+      var randomNegY = Math.random();
+      if (randomNegY > .5) {
+        randomNegY = -1;
+      } else {
+        randomNegY = 1;
+      }
+      this.randomMovementX = (Math.random()/10 + .02)/20 * randomNegX;
+      this.randomMovementY = (Math.random()/10 + .02)/20 * randomNegY;
 
       this.translationMatrix = new Matrix4();
-      this.translationMatrix.setTranslate(randomMovementX*-1, randomMovementY*-1, 0);
-
-      this.translationMatrixMovement = new Matrix4();
-      this.translationMatrixMovement.setTranslate(randomMovementX, 0 ,0);
-
-      this.translationMatrixMoveBack = new Matrix4();
-      this.translationMatrixMoveBack.setTranslate(0, randomMovementY, 0);
-
+      this.translationMatrix.setTranslate(this.randomMovementX*-1, this.randomMovementY*-1, 0);
 
 
       // CALL THIS AT THE END OF ANY SHAPE CONSTRUCTOR
@@ -70,20 +75,30 @@ class movingCircles extends Geometry {
   }
 
   render() {
-    if (this.movement < 50) {
+    if (this.movement < this.randomMovementTime) {
       this.modelMatrix = this.modelMatrix.multiply(this.translationMatrix);
       this.movement++;
-    } else if(this.movementSideways < 50) {
-      this.modelMatrix = this.modelMatrix.multiply(this.translationMatrixMovement);
-      this.movementSideWays++;
-    } else if(this.movementOrigin < 50){
-      this.modelMatrix = this.modelMatrix.multiply(this.translationMatrixMoveBack);
-      this.movementOrigin++;
     } else {
+      var randomNegX = Math.random();
+      if (randomNegX > .5) {
+        randomNegX = -1;
+      } else {
+        randomNegX = 1;
+      }
+      var randomNegY = Math.random();
+      if (randomNegY > .5) {
+        randomNegY = -1;
+      } else {
+        randomNegY = 1;
+      }
+      this.randomMovementX = (Math.random()/10 + .02)/20 * randomNegX;
+      this.randomMovementY = (Math.random()/10 + .02)/20 * randomNegY;
       this.movement = 0;
-      this.movementOrigin =0;
-      this.movementSideWays=0;
+      this.randomMovementTime = (Math.random() * 25) + 25;
+      this.translationMatrix.setTranslate(this.randomMovementX,this.randomMovementY,0);
+
     }
+    //console.log(this.randomMovementTime);
     this.shader.setUniform("u_ModelMatrix", this.modelMatrix.elements);
     return;
   }
