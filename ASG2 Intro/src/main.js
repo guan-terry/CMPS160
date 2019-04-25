@@ -29,6 +29,10 @@ function main() {
   squareButton.onclick = function() {
     inputHandler.shapeObject = 2;
   }
+  var circleButton = document.getElementById("Randomly Moving Circles");
+  circleButton.onclick = function() {
+    inputHandler.shapeObject = 3;
+  }
   // Initialize shader
   shader = new Shader(gl, ASG1_VSHADER, ASG1_FSHADER);
 

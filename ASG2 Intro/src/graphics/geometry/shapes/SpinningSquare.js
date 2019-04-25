@@ -28,7 +28,7 @@ class spinningSquare extends Geometry {
       this.translationMatrixNegative.setTranslate(xVal*-1, yVal*-1, 0);
 
       this.rotationMatrix = new Matrix4();
-      this.rotationMatrix.setRotate(1, xVal, yVal, 0);
+      this.rotationMatrix.setRotate(1, 0, 0, 1);
       // CALL THIS AT THE END OF ANY SHAPE CONSTRUCTOR
       this.interleaveVertices();
   }
@@ -61,7 +61,9 @@ class spinningSquare extends Geometry {
       return vertices;
   }
   render() {
-    
+    this.modelMatrix = this.modelMatrix.multiply(this.translationMatrix);
+    this.modelMatrix = this.modelMatrix.multiply(this.rotationMatrix);
+    this.modelMatrix = this.modelMatrix.multiply(this.translationMatrixNegative);
     this.shader.setUniform("u_ModelMatrix", this.modelMatrix.elements);
   }
 }
