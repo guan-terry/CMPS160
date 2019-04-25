@@ -68,6 +68,7 @@ class movingCircles extends Geometry {
       //console.log(vertices);
       return vertices;
   }
+
   render() {
     if (this.movement < 50) {
       this.modelMatrix = this.modelMatrix.multiply(this.translationMatrix);
