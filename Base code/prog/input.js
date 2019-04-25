@@ -53,7 +53,7 @@ class InputHandler {
         if (this.shapeObject == 1) {
           var shape = new Triangle(shader, ev.clientX, ev.clientY, r, g, b, shapeMultiplier);
         } else if(this.shapeObject == 2) {
-          var shape = new Square(shader, ev.clientX, ev.clientY, r, g, b, shapeMultiplier);
+          var shape = new spinningSquare(shader, ev.clientX, ev.clientY, r, g, b, shapeMultiplier);
         } else {
           var shape = new Circle(shader, ev.clientX, ev.clientY, circlePointNumber, r, g, b, shapeMultiplier);
         }

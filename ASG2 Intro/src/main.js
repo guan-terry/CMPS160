@@ -1,4 +1,3 @@
-
 var shader = null;
 
 function main() {
@@ -11,38 +10,35 @@ function main() {
     console.log("Failed to get WebGL rendering context.");
     return;
   }
-  var shape = 2;
+
   // Initialize the scene
   var scene = new Scene();
-  var inputHandler = new InputHandler(canvas, scene, shape);
+  var inputHandler = new InputHandler(canvas, scene);
 
-  var clearCanvas = document.getElementById("clearCanvas");
+  var clearCanvas = document.getElementById("Clear Canvas");
   clearCanvas.onclick = function() {
     scene.clearGeometries();
   }
-  var spinningSquare = document.getElementById("spinningSquare");
-  spinningSquare.onclick = function() {
-    inputHandler.shapeObject = 2;
-  }
-  /*
-  var triangleButton = document.getElementById("triangleButton");
+
+  inputHandler.shapeObject = 1;
+  var triangleButton = document.getElementById("Fluctuating Triangles");
   triangleButton.onclick = function() {
     inputHandler.shapeObject = 1;
   }
-  var squareButton = document.getElementById("squareButton");
+  var squareButton = document.getElementById("spinningSquare");
   squareButton.onclick = function() {
     inputHandler.shapeObject = 2;
   }
-  var circleButton = document.getElementById("circleButton");
-  circleButton.onclick = function() {
-    inputHandler.shapeObject = 3;
-  }*/
   // Initialize shader
   shader = new Shader(gl, ASG1_VSHADER, ASG1_FSHADER);
 
   // Add attibutes
   shader.addAttribute("a_Position");
   shader.addAttribute("a_Color");
+
+  // Add uniforms
+  var idMatrix = new Matrix4();
+  shader.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
 
   // Initialize renderer with scene and camera
   renderer = new Renderer(gl, scene, null);
