@@ -15,7 +15,7 @@ class Triangle extends Geometry {
   constructor(shader, xPos, yPos, redVal, greenVal, blueVal, sizeMultiplier) {
     super(shader);
 
-
+    this.modelMatrix = new Matrix4();
     this.rotationMatrix = new Matrix4();
     this.rotationMatrix.setRotate(5, 0, 0, 1);
 

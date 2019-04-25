@@ -33,6 +33,10 @@ function main() {
   circleButton.onclick = function() {
     inputHandler.shapeObject = 3;
   }
+  var cubeButton = document.getElementById("Tilted Cube");
+  cubeButton.onclick = function() {
+    inputHandler.shapeObject = 4;
+  }
   // Initialize shader
   shader = new Shader(gl, ASG1_VSHADER, ASG1_FSHADER);
 

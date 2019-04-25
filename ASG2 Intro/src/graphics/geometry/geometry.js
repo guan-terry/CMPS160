@@ -23,6 +23,7 @@ class Geometry {
    * A callback used to modify a geometry every frame (60 typically).
    */
   render() {
+    //console.log("render");
       return
   }
 

@@ -19,7 +19,7 @@ class movingCircles extends Geometry {
       this.yVal = ((yPos-200)/200) * -1;
       this.randomMovementTime = (Math.random() * 25) + 25;
       this.movement = 0;
-
+      this.modelMatrix = new Matrix4();
 
       this.vertices = this.generateCircleVertices(this.xVal, this.yVal, circlePointNumber, redVal, greenVal, blueVal, sizeMultiplier);
       this.faces = {0: this.vertices};

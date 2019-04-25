@@ -15,7 +15,7 @@ class CustomOBJ extends Geometry {
    * @param color An optional color object with r,g,b,a components
    * @returns {LoadedOBJ} Constructed LoadedOBJ
    */
-  constructor(shader, objStr, imgPath) {
+  constructor(shader, objStr, imgPath, redVal, blueVal, greenVal) {
     super(shader);
 
     // If an image path/data url is provided, then load/save that image as a texture
@@ -36,8 +36,17 @@ class CustomOBJ extends Geometry {
 
     this.modelMatrix = new Matrix4();
 
+    this.translationMatrix = new Matrix4();
+    this.translationMatrix.setTranslate(0,0,0);
+
+    this.translationMatrixNegative = new Matrix4();
+    this.translationMatrixNegative.setTranslate(0, 0, 0);
+
+    this.rotationMatrix = new Matrix4();
+    this.rotationMatrix.setRotate(1, 0, 1, 0);
+
     // Add the vertex points, normals, and uv coordinates in OBJ
-    var transAndScaleVal = this.addVertexPoints(objMesh.indices, objMesh.vertices);
+    var transAndScaleVal = this.addVertexPoints(objMesh.indices, objMesh.vertices, redVal, greenVal, blueVal);
     this.addVertexNormals(objMesh.indices, objMesh.vertexNormals);
     this.addVertexTextureCoordinates(objMesh.indices, objMesh.textures);
 
@@ -60,7 +69,7 @@ class CustomOBJ extends Geometry {
    * @param {Array} points The points being added
    * @returns {Array} centerPoint at index 0, necessary scale at index 1
    */
-  addVertexPoints(indices, points) {
+  addVertexPoints(indices, points, redVal, blueVal, greenVal) {
     var vertexHasNotBeenEncountered = new Array(points.length / 3);
     vertexHasNotBeenEncountered.fill(true);
 
@@ -88,6 +97,7 @@ class CustomOBJ extends Geometry {
       }
 
       this.vertices[i].point = new Vector3(xyz);
+      this.vertices[i].color = [redVal, greenVal, blueVal, 1.0];
     }
 
     centerPoint[0] /= -(points.length / 3);
@@ -190,5 +200,12 @@ class CustomOBJ extends Geometry {
     var scaleMatrix = new Matrix4();
     scaleMatrix.setScale(scaleValue, scaleValue, scaleValue);
     this.modelMatrix = scaleMatrix.multiply(this.modelMatrix);
+  }
+  render() {
+    this.modelMatrix = this.modelMatrix.multiply(this.translationMatrix);
+    this.modelMatrix = this.modelMatrix.multiply(this.rotationMatrix);
+    this.modelMatrix = this.modelMatrix.multiply(this.translationMatrixNegative);
+    this.shader.setUniform("u_ModelMatrix", this.modelMatrix.elements);
+    //console.log("this ran");
   }
 }

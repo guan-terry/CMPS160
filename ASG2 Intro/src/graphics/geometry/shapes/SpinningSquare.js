@@ -20,7 +20,7 @@ class spinningSquare extends Geometry {
 
       this.vertices = this.generateSquareVertices(xVal,yVal, redVal, greenVal, blueVal, sizeMultiplier);
       this.faces = {0: this.vertices};
-
+      this.modelMatrix = new Matrix4();
       this.translationMatrix = new Matrix4();
       this.translationMatrix.setTranslate(xVal,yVal,0);
 

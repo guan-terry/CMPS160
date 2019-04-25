@@ -12,4 +12,5 @@ class Vertex {
       // This class can be extended to support other attributes such as
       // normals and UV coordinates.
   }
+
 }

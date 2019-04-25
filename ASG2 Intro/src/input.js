@@ -62,8 +62,10 @@ class InputHandler {
       var shape = new Triangle(shader, ev.clientX, ev.clientY, r, g, b, shapeMultiplier);
     } else if (this.shapeObject == 2) {
       var shape = new spinningSquare(shader, ev.clientX, ev.clientY, r, g, b, shapeMultiplier);
-    } else {
+    } else if (this.shapeObject ==3) {
       var shape = new movingCircles(shader, ev.clientX, ev.clientY, circlePointNumber, r, g, b, shapeMultiplier);
+    } else {
+      var shape = new tiltedCubes(shader, ev.clientX, ev.clientY, r, g, b, shapeMultiplier);
     }
 
     this.scene.addGeometry(shape);
@@ -82,11 +84,16 @@ class InputHandler {
       alert("OBJ file not set!");
       return;
     }
-
+    var sliderRed = document.getElementById("rangeRed");
+    var sliderGreen = document.getElementById("rangeGreen");
+    var sliderBlue = document.getElementById("rangeBlue");
+    var r = sliderRed.value;
+    var g = sliderGreen.value;
+    var b = sliderBlue.value;
     fileReader.readAsText(objFile);
     fileReader.onloadend = function() {
-      //alert(fileReader.result);
-      var customObj = new CustomOBJ(shader, fileReader.result);
+      //console.log(fileReader.result);
+      var customObj = new CustomOBJ(shader, fileReader.result, null, r, g, b);
       _inputHandler.scene.addGeometry(customObj);
     }
   }
