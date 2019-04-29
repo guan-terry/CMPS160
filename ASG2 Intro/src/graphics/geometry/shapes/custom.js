@@ -36,15 +36,6 @@ class CustomOBJ extends Geometry {
 
     this.modelMatrix = new Matrix4();
 
-    this.translationMatrix = new Matrix4();
-    this.translationMatrix.setTranslate(0,0,0);
-
-    this.translationMatrixNegative = new Matrix4();
-    this.translationMatrixNegative.setTranslate(0, 0, 0);
-
-    this.rotationMatrix = new Matrix4();
-    this.rotationMatrix.setRotate(1, 0, 1, 0);
-
     // Add the vertex points, normals, and uv coordinates in OBJ
     var transAndScaleVal = this.addVertexPoints(objMesh.indices, objMesh.vertices, redVal, greenVal, blueVal);
     this.addVertexNormals(objMesh.indices, objMesh.vertexNormals);
@@ -202,9 +193,9 @@ class CustomOBJ extends Geometry {
     this.modelMatrix = scaleMatrix.multiply(this.modelMatrix);
   }
   render() {
-    this.modelMatrix = this.modelMatrix.multiply(this.translationMatrix);
-    this.modelMatrix = this.modelMatrix.multiply(this.rotationMatrix);
-    this.modelMatrix = this.modelMatrix.multiply(this.translationMatrixNegative);
+    var rotationMatrix = new Matrix4();
+    rotationMatrix.setRotate(-1,0,1,0);
+    this.modelMatrix = rotationMatrix.multiply(this.modelMatrix);
     this.shader.setUniform("u_ModelMatrix", this.modelMatrix.elements);
     //console.log("this ran");
   }
