@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title> CMPS160 Base Code </title>
+</head>
+
+<body onload="main()">
+  <canvas id="webgl" width="400" height="400">
+    Please use a browser that supports "canvas"
+  </canvas>
+
+  <!-- Buttons to load and print file content -->
+  <br><br>
+  <button type= "Clear Canvas" id = "Clear Canvas"> Clear Canvas </button>
+
+  Set OBJ: <input type="file" id="fileInput" />
+  <button type="button" id="fileLoad">Add OBJ To Scene</button>
+  <input type="file" id="textureType"></input>
+
+
+  <!-- Example Slider -->
+  <!--<br><br>
+  Slider: <input type="range" min="0" max="1000" value="1000" class="slider" id="exampleSlider">
+  -->
+  <!-- Include external libs -->
+  <script src="lib/webgl-utils.js"></script>
+  <script src="lib/webgl-render.js"></script>
+  <script src="lib/webgl-debug.js"></script>
+  <script src="lib/webgl-loader.js"></script>
+  <script src="lib/cuon-utils.js"></script>
+  <script src="lib/cuon-matrix.js"></script>
+
+  <!-- Include shaders -->
+  <script src="src/graphics/shaders/shader.js"></script>
+  <script src="src/graphics/shaders/asg1.js"></script>
+
+  <!-- Include Base code -->
+  <script src="src/graphics/geometry/vertex.js"></script>
+  <script src="src/graphics/geometry/geometry.js"></script>
+  <script src="src/graphics/geometry/shapes/triangle.js"></script>
+  <script src="src/graphics/geometry/shapes/custom.js"></script>
+  <script src="src/graphics/geometry/shapes/SpinningSquare.js"></script>
+  <script src="src/graphics/geometry/shapes/MovingCircles.js"></script>
+  <script src="src/graphics/geometry/shapes/TiltedCubes.js"></script>
+  <script src="src/graphics/renderer.js"></script>
+  <script src="src/graphics/scene.js"></script>
+  <script src="src/main.js"></script>
+  <script src="src/input.js"></script>
+  <!--<button type="buttonTriangle" id="triangleButton">Triangle</button>
+  <button type="buttonSquare" id="squareButton">Square</button>
+  <button type="buttonCircle" id="circleButton">Circle </button>!-->
+
+  <br>Drawing Mode:</br>
+  <button type="Spinning Squares" id="spinningSquare">Spinning Square</button>
+  <button type="Fluctuating Triangles" id = "Fluctuating Triangles"> Fluctuating Triangles</button>
+  <button type="Randomly Moving Circles" id = "Randomly Moving Circles"> Randomly Moving Circles</button>
+  <button type="Tilted Cube" id = "Tilted Cube"> Tilted Cube </button>
+  <input id="switchRainbow" type="button" value="Solid Colors"></input>
+
+  <div class="slidecontainer">
+    Shape Color: <br>
+    Red <input type="range" min="0" max="255" value="0" class="slider" id="rangeRed">
+    Green <input type="range" min="0" max="255" value="255" class="slider" id="rangeGreen">
+    Blue <input type="range" min="0" max="255" value="0" class="slider" id="rangeBlue">
+    <br>
+    Shape Size: <input type="range" min=".2" max="5" value="1" class="slider" id="shapeSlider">
+    (Circles) Segment Count: <input type="range" min="3" max="30" value="12" class="slider" id="segCount">
+  </div>
+</body>
+
+</html>
