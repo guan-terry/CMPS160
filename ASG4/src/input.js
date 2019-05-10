@@ -66,10 +66,10 @@ class InputHandler {
    */
   mouseMove(ev) {
     if (this.isMouseDown && ev.movementX != 0) {
-      this.camera.tilt(ev.movementX);
+      this.camera.pan(ev.movementX);
     }
     if (this.isMouseDown && ev.movementY != 0) {
-      this.camera.pan(ev.movementY);
+      this.camera.tilt(ev.movementY);
     }
   }
   /**
@@ -92,9 +92,9 @@ class InputHandler {
     //console.log("key down", keyName);
 
     if (keyName == "a") {
-      this.camera.truck(1);
-    } else if (keyName == "d") {
       this.camera.truck(-1);
+    } else if (keyName == "d") {
+      this.camera.truck(1);
     } else if (keyName == 'w') {
       this.camera.dolly(-1);
     } else if (keyName == 's') {

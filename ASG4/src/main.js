@@ -45,9 +45,12 @@ function main() {
   })*/
 
   //adds the floor of the scene
-  var floor = new spinningSquare(shaderNoTexture, 0, -.5, 0, 255, 0, 0);
+  var floor = new spinningSquare(shaderNoTexture, 0, 0, 0, 255, 0, 0);
   scene.addGeometry(floor);
 
+  for(int i = 0; i < 32; i++) {
+    
+  }
   // Initialize renderer with scene and camera
   renderer = new Renderer(gl, scene, camera);
   renderer.start();

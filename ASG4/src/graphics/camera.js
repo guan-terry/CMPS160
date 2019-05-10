@@ -14,11 +14,10 @@ class Camera {
   constructor(shader) {
     this.speed = 0.1;
     this.isProjection = false;
-    this.near = 1;
+    this.near = .5;
     this.far = 10;
 
     this.rotationMatrix = new Matrix4();
-    this.rotationMatrix.setRotate(90, 0, 0, 1);
 
     // Camera view attributes
     this.eye = new Vector3([0, 0, 1]);
@@ -29,6 +28,7 @@ class Camera {
     this.updateView();
 
     this.projectionMatrix = new Matrix4();
+    this.projectionMatrix.setOrtho(-1, 1, -1, 1, this.near, this.far);
   }
 
   /**
@@ -56,8 +56,24 @@ class Camera {
   /**
    *  Changes the y direction of the eye
    */
-  pan(dir) {
-    this.eye = this.eye.add(new Vector3([0, dir * -.01, 0]));
+  tilt(dir) {
+    // calculate the n camera axis
+    var n = this.eye.sub(this.center);
+    n = n.normalize();
+
+    //calculate the u camera axis
+    var u = this.up.cross(n);
+    u = u.normalize();
+
+    // calculate the new center
+    var newCenter = this.center.sub(this.eye);
+    this.rotationMatrix.setRotate(dir*this.speed, u.elements[0], u.elements[1], u.elements[2]);
+    newCenter = this.rotationMatrix.multiplyVector3(newCenter);
+    this.center = newCenter.add(this.eye);
+
+    if(Math.abs(n.dot(this.up)) >= 0.985) {
+      this.up = this.rotationMatrix.multiplyVector3(this.up);
+    }
 
     this.updateView();
   }
@@ -65,30 +81,33 @@ class Camera {
   /**
    *  Changes the x direction of the eye
    */
-  tilt(dir) {
-    this.eye = this.eye.add(new Vector3([dir * .01, 0, 0]));
+  pan(dir) {
+
+    var up = this.up.sub(this.eye);
+    up = up.normalize();
+
+    // calculate the new center
+    var newCenter = this.center.sub(this.eye);
+    this.rotationMatrix.setRotate(dir*this.speed, up.elements[0], up.elements[1], up.elements[2]);
+    newCenter = this.rotationMatrix.multiplyVector3(newCenter);
+    this.center = newCenter.add(this.eye);
+
+
 
     this.updateView();
   }
 
   /**
-   *moves the camera along the y axis.
+   *
+   *  Moves along the z axis
    */
   dolly(dir) {
     // calculate the n camera axis
-    var n = this.eye.sub(this.center);
+    var n = new Vector3([0,0,1])
+    console.log(dir);
     n = n.normalize();
-
-    //calculate the u camera axis
-    var u = this.rotationMatrix.multiplyVector3(this.up.cross(n));
-    u = u.normalize();
-
-    //scale the u axis to the desired distance to move;
-    u = u.mul(dir * this.speed);
-
-    // Add the direciton vector to both the eye and center positions
-    this.eye = this.eye.add(u);
-    this.center = this.center.add(u);
+    this.eye = this.eye.add(n.mul(dir*this.speed));
+    this.center = this.center.add(n.mul(dir*this.speed));
 
     this.updateView();
 

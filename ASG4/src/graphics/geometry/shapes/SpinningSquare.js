@@ -57,10 +57,10 @@ class spinningSquare extends Geometry {
     var vertex3 = new Vertex(xPos + (shapeMultiplier), yPos, zPos + (shapeMultiplier), redVal, greenVal, blueVal);
     //lower right
     var vertex4 = new Vertex(xPos + (shapeMultiplier), yPos, zPos - (shapeMultiplier), redVal, greenVal, blueVal);
-    var vertex1 = new Vertex(-1, -.6, -10, 255, 0, 0);
-    var vertex2 = new Vertex(-1, -.3, 10, 255, 0, 0);
-    var vertex3 = new Vertex(1, -.6, -10, 255, 0, 0);
-    var vertex4 = new Vertex(1, -.3, 10, 255, 0, 0);
+    var vertex1 = new Vertex(-32, -.8, -32, 255, 0, 0);
+    var vertex2 = new Vertex(-32, -.8, 32, 255, 0, 0);
+    var vertex3 = new Vertex(32, -.8, -32, 255, 0, 0);
+    var vertex4 = new Vertex(32, -.8, 32, 255, 0, 0);
 
     vertices.push(vertex1);
     vertices.push(vertex2);
