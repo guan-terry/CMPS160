@@ -6,29 +6,19 @@
  */
 
 class tiltedCubes extends Geometry {
-  constructor(shader, xPos, yPos, redVal, greenVal, blueVal, sizeMultiplier, image) {
+  constructor(shader, xPos, yPos, zPos, redVal, greenVal, blueVal, sizeMultiplier, image) {
     super(shader);
-    this.xVal = (xPos - 200) / 200;
-    this.yVal = ((yPos - 200) / 200) * -1;
-    this.vertices = this.generatetiltedCubes(this.xVal, this.yVal, redVal, greenVal, blueVal, sizeMultiplier);
+
+    this.vertices = this.generatetiltedCubes(xPos, yPos, zPos, redVal, greenVal, blueVal, sizeMultiplier);
     this.faces = {
       0: this.vertices
     };
     this.image = null;
     if (image != null) {
+      console.log("image is not null")
       this.image = image;
     }
 
-    this.modelMatrix = new Matrix4();
-
-    this.translationMatrix = new Matrix4();
-    this.translationMatrix.setTranslate(this.xVal, this.yVal, 0);
-
-    this.translationMatrixNegative = new Matrix4();
-    this.translationMatrixNegative.setTranslate(-this.xVal, -this.yVal, 0);
-
-    this.rotationMatrix = new Matrix4();
-    this.rotationMatrix.setRotate(1, 0, 100, 1);
     if (this.image != null) {
       this.addVertexTextureCoordinates();
     }
@@ -86,78 +76,78 @@ class tiltedCubes extends Geometry {
 
   }
 
-  generatetiltedCubes(xPos, yPos, redVal, greenVal, blueVal, shapeMultiplier) {
+  generatetiltedCubes(xPos, yPos, zPos, redVal, greenVal, blueVal, shapeMultiplier) {
     var vertices = []
-    //front upper Left
-    var vertex1 = new Vertex(xPos - (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier), -.1 * shapeMultiplier, redVal, greenVal, blueVal);
-    //front lower left
-    var vertex2 = new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal);
-    //front upper right
-    var vertex3 = new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier), -.1 * shapeMultiplier, redVal, greenVal, blueVal);
-    //front lower right
-    var vertex4 = new Vertex(xPos + (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal);
-    //back upper left
-    var vertex5 = new Vertex(xPos - (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal);
-    //back lower Left
-    var vertex6 = new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1) + .1 * shapeMultiplier, redVal, greenVal, blueVal);
-    //back upper right
-    var vertex7 = new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal);
-    //back lower right
-    var vertex8 = new Vertex(xPos + (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1) + .1 * shapeMultiplier, redVal, greenVal, blueVal);
+    //floor left-most lower corner
+    var vertex1 = new Vertex(xPos, -.8, zPos, redVal, greenVal, blueVal);
+    //floor left-most upper corner
+    var vertex2 = new Vertex(xPos, -.8, zPos + 1, redVal, greenVal, blueVal);
+    //wall left-most lower corner
+    var vertex3 = new Vertex(xPos, yPos - .8, zPos, redVal, greenVal, blueVal);
+    //wall left-most upper corner.
+    var vertex4 = new Vertex(xPos, yPos - .8, zPos + 1, redVal, greenVal, blueVal);
+    //floor upper left
+    var vertex5 = new Vertex(xPos + 1, -.8, zPos, redVal, greenVal, blueVal);
+    //floor lower Left
+    var vertex6 = new Vertex(xPos + 1, -.8, zPos + 1, redVal, greenVal, blueVal);
+    //wall upper right
+    var vertex7 = new Vertex(xPos + 1, yPos - .8, zPos, redVal, greenVal, blueVal);
+    //wall lower right
+    var vertex8 = new Vertex(xPos + 1, yPos - .8, zPos + 1, redVal, greenVal, blueVal);
 
     //front face
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier), -.1 * shapeMultiplier, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier), -.1 * shapeMultiplier, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier), -.1 * shapeMultiplier, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal));
+    vertices.push(new Vertex(vertex2));
+    vertices.push(new Vertex(vertex1));
+    vertices.push(new Vertex(vertex6));
+    vertices.push(new Vertex(vertex1));
+    vertices.push(new Vertex(vertex6));
+    vertices.push(new Vertex(vertex5));
 
     //back face
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal));
-    vertices.push( new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1) + .1 * shapeMultiplier, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal));
-    vertices.push( new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1) + .1 * shapeMultiplier, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1) + .1 * shapeMultiplier, redVal, greenVal, blueVal));
+    vertices.push(new Vertex(vertex4));
+    vertices.push(new Vertex(vertex3));
+    vertices.push(new Vertex(vertex8));
+    vertices.push(new Vertex(vertex3));
+    vertices.push(new Vertex(vertex8));
+    vertices.push(new Vertex(vertex7));
 
     //top faces
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier), -.1 * shapeMultiplier, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier), -.1 * shapeMultiplier, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier), -.1 * shapeMultiplier, redVal, greenVal, blueVal));
+    vertices.push(new Vertex(vertex2));
+    vertices.push(new Vertex(vertex4));
+    vertices.push(new Vertex(vertex8));
+    vertices.push(new Vertex(vertex2));
+    vertices.push(new Vertex(vertex8));
+    vertices.push(new Vertex(vertex6));
 
     //bottom faces
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal));
-    vertices.push( new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1) + .1 * shapeMultiplier, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1) + .1 * shapeMultiplier, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1) + .1 * shapeMultiplier, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal));
+    vertices.push(new Vertex(vertex1));
+    vertices.push(new Vertex(vertex3));
+    vertices.push(new Vertex(vertex4));
+    vertices.push(new Vertex(vertex1));
+    vertices.push(new Vertex(vertex4));
+    vertices.push(new Vertex(vertex5));
 
     //right faces
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier), -.1 * shapeMultiplier, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal));
-    vertices.push(new Vertex(xPos + (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1) + .1 * shapeMultiplier, redVal, greenVal, blueVal));
+    vertices.push(new Vertex(vertex6));
+    vertices.push(new Vertex(vertex5));
+    vertices.push(new Vertex(vertex8));
+    vertices.push(new Vertex(vertex5));
+    vertices.push(new Vertex(vertex8));
+    vertices.push(new Vertex(vertex7));
 
     //left faces
     //3
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier), -.1 * shapeMultiplier, redVal, greenVal, blueVal));
+    vertices.push(new Vertex(vertex2));
     //4
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal));
+    vertices.push(new Vertex(vertex1));
     //7
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal));
+    vertices.push(new Vertex(vertex4));
     //3
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier), 0, redVal, greenVal, blueVal));
+    vertices.push(new Vertex(vertex1));
     //7
-    vertices.push(new Vertex(xPos - (0.135 * shapeMultiplier), yPos + (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1), redVal, greenVal, blueVal));
+    vertices.push(new Vertex(vertex4));
     //8
-    vertices.push( new Vertex(xPos - (0.135 * shapeMultiplier), yPos - (0.135 * shapeMultiplier) + .1 * shapeMultiplier, ((0.135 * shapeMultiplier) + .1) + .1 * shapeMultiplier, redVal, greenVal, blueVal));
+    vertices.push(new Vertex(vertex3));
 
     return vertices;
 
