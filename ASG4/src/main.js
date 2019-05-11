@@ -96,7 +96,7 @@ function main() {
 
 
   inputHandler.readTexture("objs/sky256.png", function(image) {
-    var skyBox = new tiltedCubes(shader, -16, -3, -16, 0, 0, 0 , 32, image, false );
+    var skyBox = new tiltedCubes(shader, -16, 4, -16, 0, 0, 0 , 32, image, false );
     scene.addGeometry(skyBox);
   })
 
