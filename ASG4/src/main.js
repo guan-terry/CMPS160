@@ -79,18 +79,23 @@ function main() {
   })*/
 
   //adds the floor of the scene
-  var floor = new spinningSquare(shaderNoTexture, 0, 0, 0, 255, 0, 0);
+  var floor = new spinningSquare(shaderNoTexture, 0, 0, 0, 0, 255, 0);
   scene.addGeometry(floor);
 
-  inputHandler.readTexture("objs/cat_.jpg", function(image) {
+  inputHandler.readTexture("objs/wall1.jpg", function(image) {
     for(var row = 0; row < 32; row++) {
       for (var col = 0; col < 32; col++) {
         if (walls[row][col] > 0) {
-          var wallDraw = new tiltedCubes(shader, row-16, walls[row][col], col-16, 0, 0, 0, 0, image )
+          var wallDraw = new tiltedCubes(shader, row-16, walls[row][col], col-16, 0, 0, 0, 1, image, true )
           scene.addGeometry(wallDraw);
         }
       }
     }
+  })
+
+  inputHandler.readTexture("objs/sky.jpg", function(image) {
+    var skyBox = new tiltedCubes(shader, -16, 7, -16, 0, 0, 0 , 32, image, false );
+    scene.addGeometry(skyBox);
   })
 
   // Initialize renderer with scene and camera

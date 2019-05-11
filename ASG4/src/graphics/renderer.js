@@ -61,8 +61,8 @@ class Renderer {
                 if(!(geometry.image.src in this.textures)) {
                     // Create a texture object and store id using its path as key
                     this.textures[geometry.image.src] = this.gl.createTexture();
-                    this.loadTexture(this.textures[geometry.image.src], geometry.image);
                 }
+                this.loadTexture(this.textures[geometry.image.src], geometry.image);
             }
 
             // Callback function in the case user wants to change the
