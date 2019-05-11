@@ -14,10 +14,14 @@ class Camera {
   constructor(shader) {
     this.speed = 0.1;
     this.isProjection = false;
-    this.near = .5;
-    this.far = 7;
 
     this.rotationMatrix = new Matrix4();
+
+    this.left = -.7;
+    this.right = .7;
+    this.top = 1.5;
+    this.bottom = -1;
+    this.near = 1.5;
 
     // Camera view attributes
     this.eye = new Vector3([0, 0, 1]);
@@ -28,7 +32,7 @@ class Camera {
     this.updateView();
 
     this.projectionMatrix = new Matrix4();
-    this.projectionMatrix.setOrtho(-1, 1, -1, 1, this.near, this.far);
+    this.projectionMatrix.setOrtho(this.left, this.right, this.bottom, this.top, this.near, 7);
   }
 
   /**
@@ -127,31 +131,44 @@ class Camera {
    */
   changePerspective() {
     if (!this.isProjection) {
-      this.projectionMatrix.setFrustum(-1, 1, -1, 1, this.near, this.far);
+      this.projectionMatrix.setFrustum(this.left, this.right, this.bottom, this.top, this.near,  7);
       this.isProjection = true;
     } else {
-      this.projectionMatrix.setOrtho(-1, 1, -1, 1, this.near, this.far);
+      this.projectionMatrix.setOrtho(this.left, this.right, this.bottom, this.top, this.near,  7);
       this.isProjection = false;
     }
   }
 
-  zoom() {
+  zoom(ev) {
     if (this.isProjection) {
-      this.near *= 1.01;
-      this.projectionMatrix.setFrustum(-1, 1, -1, 1, this.near, this.far);
+      this.left *= ev/100 + 1;
+      this.right *= ev/100 + 1;
+      this.top *= ev/100 + 1;
+      this.bottom *= ev/100 + 1;
+      this.projectionMatrix.setFrustum(this.left, this.right, this.bottom, this.top, this.near,  7);
     } else {
-      this.near *= 1.01;
-      this.projectionMatrix.setOrtho(-1, 1, -1, 1, this.near, this.far);
+      this.left *= ev/100 + 1;
+      this.right *= ev/100 + 1;
+      this.top *= ev/100 + 1;
+      this.bottom *= ev/100 + 1;
+      this.projectionMatrix.setOrtho(this.left, this.right, this.bottom, this.top, this.near,  7);
     }
   }
 
-  zoomOut() {
+  zoomOut(ev) {
+    ev = Math.abs(ev);
     if (this.isProjection) {
-      this.near *= .99;
-      this.projectionMatrix.setFrustum(-1, 1, -1, 1, this.near, this.far);
+      this.left *= 1 - ev/100;
+      this.right *= 1 - ev/100;
+      this.top *= 1 - ev/100;
+      this.bottom *= 1 - ev/100;
+      this.projectionMatrix.setFrustum(this.left, this.right, this.bottom, this.top, this.near,  7);
     } else {
-      this.near *= .99;
-      this.projectionMatrix.setOrtho(-1, 1, -1, 1, this.near, this.far);
+      this.left *= 1 - ev/100;
+      this.right *= 1 - ev/100;
+      this.top *= 1 - ev/100;
+      this.bottom *= 1 - ev/100;
+      this.projectionMatrix.setOrtho(this.left, this.right, this.bottom, this.top, this.near,  7);
     }
   }
   /**

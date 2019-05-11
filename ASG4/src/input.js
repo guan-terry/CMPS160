@@ -37,8 +37,13 @@ class InputHandler {
       _inputHandler.keyUp(ev);
     }, false);*/
 
-    document.addEventListener('scroll', function(ev) {
-      _inputHandler.scroll(ev);
+    document.addEventListener('mousewheel', function(ev) {
+      console.log(ev);
+      if (ev.deltaY > .5) {
+        _inputHandler.zoom(ev);
+      } else if (ev.deltaY < -.5){
+        _inputHandler.zoomOut(ev);
+      }
     });
 
     // Button Events
@@ -57,6 +62,14 @@ class InputHandler {
    */
   mouseUp(ev) {
     this.isMouseDown = false;
+  }
+
+  zoomOut(ev) {
+    this.camera.zoomOut(ev.deltaY);
+  }
+
+  zoom(ev) {
+    this.camera.zoom(ev.deltaY);
   }
 
   /**
@@ -102,9 +115,9 @@ class InputHandler {
     } else if (keyName == 'z') {
       this.camera.changePerspective();
     } else if (keyName == 'm') {
-      this.camera.zoom();
+      this.camera.zoom(1);
     } else if (keyName == 'n') {
-      this.camera.zoomOut();
+      this.camera.zoomOut(1);
     }
   }
 
