@@ -131,10 +131,10 @@ class Camera {
    */
   changePerspective() {
     if (!this.isProjection) {
-      this.projectionMatrix.setFrustum(this.left, this.right, this.bottom, this.top, this.near,  7);
+      this.projectionMatrix.setFrustum(this.left, this.right, this.bottom, this.top, this.near,  32);
       this.isProjection = true;
     } else {
-      this.projectionMatrix.setOrtho(this.left, this.right, this.bottom, this.top, this.near,  7);
+      this.projectionMatrix.setOrtho(this.left, this.right, this.bottom, this.top, this.near,  32);
       this.isProjection = false;
     }
   }
@@ -145,13 +145,13 @@ class Camera {
       this.right *= ev/100 + 1;
       this.top *= ev/100 + 1;
       this.bottom *= ev/100 + 1;
-      this.projectionMatrix.setFrustum(this.left, this.right, this.bottom, this.top, this.near,  7);
+      this.projectionMatrix.setFrustum(this.left, this.right, this.bottom, this.top, this.near,  32);
     } else {
       this.left *= ev/100 + 1;
       this.right *= ev/100 + 1;
       this.top *= ev/100 + 1;
       this.bottom *= ev/100 + 1;
-      this.projectionMatrix.setOrtho(this.left, this.right, this.bottom, this.top, this.near,  7);
+      this.projectionMatrix.setOrtho(this.left, this.right, this.bottom, this.top, this.near,  32);
     }
   }
 
@@ -162,13 +162,13 @@ class Camera {
       this.right *= 1 - ev/100;
       this.top *= 1 - ev/100;
       this.bottom *= 1 - ev/100;
-      this.projectionMatrix.setFrustum(this.left, this.right, this.bottom, this.top, this.near,  7);
+      this.projectionMatrix.setFrustum(this.left, this.right, this.bottom, this.top, this.near,  32);
     } else {
       this.left *= 1 - ev/100;
       this.right *= 1 - ev/100;
       this.top *= 1 - ev/100;
       this.bottom *= 1 - ev/100;
-      this.projectionMatrix.setOrtho(this.left, this.right, this.bottom, this.top, this.near,  7);
+      this.projectionMatrix.setOrtho(this.left, this.right, this.bottom, this.top, this.near,  32);
     }
   }
   /**

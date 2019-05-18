@@ -5,11 +5,10 @@
  * @this {Vertex}
  */
 class Vertex {
-  constructor(nx, ny, nz, x, y, z, r, g, b) {
+  constructor(x, y, z) {
       this.point  = new Vector3([x, y, z]);
-      this.color  = [r/255, g/255, b/255, 1.0];
-      this.texCoord  = [0.0, 0.0];
-      this.normal = new Vector3([nx, ny, nz]);
+      this.color  = [1.0, 0.0, 0.0, 1.0];
+      this.normal = new Vector3([0.0, 0.0, 0.0]);
 
       // This class can be extended to support other attributes such as
       // normals and UV coordinates.

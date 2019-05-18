@@ -61,6 +61,7 @@ class spinningSquare extends Geometry {
     var vertex2 = new Vertex(-16, -.8, 16, redVal, greenVal, blueVal);
     var vertex3 = new Vertex(16, -.8, -16, redVal, greenVal, blueVal);
     var vertex4 = new Vertex(16, -.8, 16, redVal, greenVal, blueVal);
+    
 
     vertices.push(vertex1);
     vertices.push(vertex2);

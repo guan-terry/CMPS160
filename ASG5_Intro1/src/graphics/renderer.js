@@ -19,8 +19,6 @@ class Renderer {
         this.scene = scene;
         this.camera = camera;
 
-        this.textures = {};
-
         this.initGLSLBuffers();
 
         // Setting canvas' clear color
@@ -54,22 +52,11 @@ class Renderer {
             this.gl.useProgram(geometry.shader.program)
             this.gl.program = geometry.shader.program
 
-            geometry.shader.setUniform("u_ViewMatrix", this.camera.viewMatrix.elements);
-            geometry.shader.setUniform("u_ProjectionMatrix", this.camera.projectionMatrix.elements);
-
             if(this.scene.light != null) {
                 geometry.shader.setUniform("u_DiffuseColor", this.scene.light.diffuse);
                 geometry.shader.setUniform("u_AmbientColor", this.scene.light.ambient);
                 geometry.shader.setUniform("u_LightPosition", this.scene.light.pos.elements);
                 geometry.shader.setUniform("u_SpecularColor", this.scene.light.specular);
-            }
-
-            if(geometry.image != null) {
-                if(!(geometry.image.src in this.textures)) {
-                    // Create a texture object and store id using its path as key
-                    this.textures[geometry.image.src] = this.gl.createTexture();
-                }
-                this.loadTexture(this.textures[geometry.image.src], geometry.image);
             }
 
             // Callback function in the case user wants to change the
@@ -175,23 +162,5 @@ class Renderer {
               this.gl.uniform1i(uniform.location, uniform.value);
               break;
         }
-    }
-
-    loadTexture(texture, image) {
-        // Flip the image's y axis
-        this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, 1);
-
-        // Enable texture unit0
-        this.gl.activeTexture(this.gl.TEXTURE0);
-
-        // Bind the texture object to the target
-        this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
-
-        // Set the texture parameters
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
-
-        // Set the texture image
-        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image);
     }
 }

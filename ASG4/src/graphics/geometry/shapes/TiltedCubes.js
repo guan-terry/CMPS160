@@ -78,7 +78,7 @@ class tiltedCubes extends Geometry {
 
   generatetiltedCubes(xPos, yPos, zPos, redVal, greenVal, blueVal, shapeMultiplier, isWall) {
     var vertices = []
-    var wallFloor = 5;
+    var wallFloor = -8;
     if (isWall) {
       wallFloor = -.8;
     }
@@ -100,58 +100,58 @@ class tiltedCubes extends Geometry {
     var vertex8 = new Vertex(xPos + 1*shapeMultiplier, yPos + wallFloor, zPos + 1*shapeMultiplier, redVal, greenVal, blueVal);
 
     //front face
-    vertices.push(new Vertex(vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.color[0], vertex2.color[1], vertex2.color[2]));
-    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
-    vertices.push(new Vertex(vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.color[0], vertex6.color[1], vertex6.color[2]));
-    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
-    vertices.push(new Vertex(vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.color[0], vertex6.color[1], vertex6.color[2]));
-    vertices.push(new Vertex(vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.color[0], vertex5.color[1], vertex5.color[2]));
+    vertices.push(new Vertex(vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.color[0], vertex2.color[1], vertex2.color[2]));
+    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
+    vertices.push(new Vertex(vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.color[0], vertex6.color[1], vertex6.color[2]));
+    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
+    vertices.push(new Vertex(vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.color[0], vertex6.color[1], vertex6.color[2]));
+    vertices.push(new Vertex(vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.color[0], vertex5.color[1], vertex5.color[2]));
 
     //back face
-    vertices.push(new Vertex(vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.color[0], vertex4.color[1], vertex4.color[2]));
-    vertices.push(new Vertex(vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.color[0], vertex3.color[1], vertex3.color[2]));
-    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
-    vertices.push(new Vertex(vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.color[0], vertex3.color[1], vertex3.color[2]));
-    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
-    vertices.push(new Vertex(vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.color[0], vertex7.color[1], vertex7.color[2]));
+    vertices.push(new Vertex(vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.color[0], vertex4.color[1], vertex4.color[2]));
+    vertices.push(new Vertex(vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.color[0], vertex3.color[1], vertex3.color[2]));
+    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
+    vertices.push(new Vertex(vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.color[0], vertex3.color[1], vertex3.color[2]));
+    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
+    vertices.push(new Vertex(vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.color[0], vertex7.color[1], vertex7.color[2]));
 
     //top faces
-    vertices.push(new Vertex(vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.color[0], vertex2.color[1], vertex2.color[2]));
-    vertices.push(new Vertex(vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.color[0], vertex4.color[1], vertex4.color[2]));
-    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
-    vertices.push(new Vertex(vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.color[0], vertex2.color[1], vertex2.color[2]));
-    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
-    vertices.push(new Vertex(vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.color[0], vertex6.color[1], vertex6.color[2]));
+    vertices.push(new Vertex(vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.color[0], vertex2.color[1], vertex2.color[2]));
+    vertices.push(new Vertex(vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.color[0], vertex4.color[1], vertex4.color[2]));
+    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
+    vertices.push(new Vertex(vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.color[0], vertex2.color[1], vertex2.color[2]));
+    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
+    vertices.push(new Vertex(vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.color[0], vertex6.color[1], vertex6.color[2]));
 
     //bottom faces
-    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
-    vertices.push(new Vertex(vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.color[0], vertex3.color[1], vertex3.color[2]));
-    vertices.push(new Vertex(vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.color[0], vertex7.color[1], vertex7.color[2]));
-    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
-    vertices.push(new Vertex(vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.color[0], vertex7.color[1], vertex7.color[2]));
-    vertices.push(new Vertex(vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.color[0], vertex5.color[1], vertex5.color[2]));
+    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
+    vertices.push(new Vertex(vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.color[0], vertex3.color[1], vertex3.color[2]));
+    vertices.push(new Vertex(vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.color[0], vertex7.color[1], vertex7.color[2]));
+    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
+    vertices.push(new Vertex(vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.color[0], vertex7.color[1], vertex7.color[2]));
+    vertices.push(new Vertex(vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.color[0], vertex5.color[1], vertex5.color[2]));
 
     //right faces
-    vertices.push(new Vertex(vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.color[0], vertex6.color[1], vertex6.color[2]));
-    vertices.push(new Vertex(vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.color[0], vertex5.color[1], vertex5.color[2]));
-    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
-    vertices.push(new Vertex(vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.color[0], vertex5.color[1], vertex5.color[2]));
-    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
-    vertices.push(new Vertex(vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.color[0], vertex7.color[1], vertex7.color[2]));
+    vertices.push(new Vertex(vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.point.elements[0], vertex6.point.elements[1], vertex6.point.elements[2], vertex6.color[0], vertex6.color[1], vertex6.color[2]));
+    vertices.push(new Vertex(vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.color[0], vertex5.color[1], vertex5.color[2]));
+    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
+    vertices.push(new Vertex(vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.point.elements[0], vertex5.point.elements[1], vertex5.point.elements[2], vertex5.color[0], vertex5.color[1], vertex5.color[2]));
+    vertices.push(new Vertex(vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.point.elements[0], vertex8.point.elements[1], vertex8.point.elements[2], vertex8.color[0], vertex8.color[1], vertex8.color[2]));
+    vertices.push(new Vertex(vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.point.elements[0], vertex7.point.elements[1], vertex7.point.elements[2], vertex7.color[0], vertex7.color[1], vertex7.color[2]));
 
     //left faces
     //3
-    vertices.push(new Vertex(vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.color[0], vertex2.color[1], vertex2.color[2]));
+    vertices.push(new Vertex(vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.point.elements[0], vertex2.point.elements[1], vertex2.point.elements[2], vertex2.color[0], vertex2.color[1], vertex2.color[2]));
     //4
-    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
+    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
     //7
-    vertices.push(new Vertex(vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.color[0], vertex4.color[1], vertex4.color[2]));
+    vertices.push(new Vertex(vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.color[0], vertex4.color[1], vertex4.color[2]));
     //3
-    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
+    vertices.push(new Vertex(vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.point.elements[0], vertex1.point.elements[1], vertex1.point.elements[2], vertex1.color[0], vertex1.color[1], vertex1.color[2]));
     //7
-    vertices.push(new Vertex(vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.color[0], vertex4.color[1], vertex4.color[2]));
+    vertices.push(new Vertex(vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.point.elements[0], vertex4.point.elements[1], vertex4.point.elements[2], vertex4.color[0], vertex4.color[1], vertex4.color[2]));
     //8
-    vertices.push(new Vertex(vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.color[0], vertex3.color[1], vertex3.color[2]));
+    vertices.push(new Vertex(vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.point.elements[0], vertex3.point.elements[1], vertex3.point.elements[2], vertex3.color[0], vertex3.color[1], vertex3.color[2]));
 
     return vertices;
 

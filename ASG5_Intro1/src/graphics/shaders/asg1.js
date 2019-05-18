@@ -1,5 +1,5 @@
 // Vertex Shader
-var OLD_VSHADER =
+var ASG1_VSHADER =
   `precision mediump float;
   attribute vec4 a_Position;
   varying vec3 v_Position;
@@ -8,25 +8,29 @@ var OLD_VSHADER =
   attribute vec4 a_Color;
   varying vec4 v_Color;
 
-  uniform mat4 u_ViewMatrix;
-  uniform mat4 u_ProjectionMatrix;
+  uniform mat4 u_ModelMatrix;
   uniform mat4 u_NormalMatrix;
+
 
   void main() {
     v_Color = a_Color;
     v_Position = vec3(u_ModelMatrix * a_Position);
     v_Normal = normalize(vec3(u_NormalMatrix * a_Normal));
-    v_eyeVector = vec3(u_ViewMatrix[0], u_ViewMatrix[1], u_ViewMatrix[2]);
-    gl_Position = u_ProjectionMatrix * u_ViewMatrix* a_Position;
+    gl_Position = u_ModelMatrix * a_Position;
   }`;
 
 // Fragment Shader
-var OLD_FSHADER =
+//vec3 eyeMatrix = new Vector3(viewMatrix.elements[0], viewMatrix.elements[1], viewMatrix.elements[3]);
+//    vec3 specular = u_SpecularColor * v_Color.rgb * maxSquared;
+//    float maxSquared = max(dot(vectorRay, eyeMatrix), 0);
+
+
+
+var ASG1_FSHADER =
   `precision mediump float;
   varying vec4 v_Color;
   varying vec3 v_Normal;
   varying vec3 v_Position;
-
 
   uniform vec3 u_DiffuseColor;
   uniform vec3 u_AmbientColor;
