@@ -13,27 +13,27 @@ function main() {
 
   // Initialize the scene
   var scene = new Scene();
-  var light = new Light(-.5,1,-2);
+  var light = new Light(16,32,0);
   scene.setLight(light);
   var camera = new Camera();
 
-  var walls = [[1,2,3,2,1,4,1,2,3,1,3,4,1,4,2,2,3,3,4,3,3,1,4,2,4,1,4,3,2,1,4,1],//1
+  var walls = [[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],//1
                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],//2
-               [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],//3
-               [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],//4
+               [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],//3
+               [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],//4
                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
-               [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],//6
-               [3,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+               [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],//6
+               [3,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
                [3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,4],//8
                [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
                [3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],//10
                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
                [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],//12
-               [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
-               [3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],//14
-               [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,3],
+               [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+               [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],//14
+               [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,3],
                [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],//16
-               [1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+               [4,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
                [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],//18
                [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
                [3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1],//20
@@ -59,7 +59,6 @@ function main() {
 
   // Add attibutes for texture shader
   shader.addAttribute("a_Position");
-  shader.addAttribute("a_Color");
   shader.addAttribute("a_TexCoord");
   shader.addAttribute("a_Normal");
 
@@ -69,6 +68,8 @@ function main() {
   shader.addUniform("u_Sampler", "sampler2D", new Matrix4().elements);
   shader.addUniform("u_ViewMatrix", "mat4", new Matrix4().elements);
   shader.addUniform("u_ProjectionMatrix", "mat4", new Matrix4().elements);
+  shader.addUniform("u_NormalMatrix", "mat4", new Matrix4().elements);
+
 
   shader.addUniform("u_EyeVector", "vec3", new Vector3());
   shader.addUniform("u_SpecularColor", "vec3", new Vector3());
@@ -102,7 +103,7 @@ function main() {
   //adds the floor of the scene
   var floor = new spinningSquare(shaderNoTexture, 0, 0, 0, 0, 255, 0);
   scene.addGeometry(floor);
-/*
+
   inputHandler.readTexture("objs/wall256.png", function(image) {
     for(var row = 0; row < 32; row++) {
       for (var col = 0; col < 32; col++) {
@@ -113,21 +114,31 @@ function main() {
       }
     }
   })
-*/
 
-  inputHandler.readTexture("objs/wall256.png", function(image) {
-    var wallDraw = new tiltedCubes(shader, 0, 2, -2, 0, 0, 0, 1, image, true);
-    scene.addGeometry(wallDraw);
-  })
 
-  inputHandler.readTexture("objs/wall256.png", function(image) {
-    var skyBox = new tiltedCubes(shader, -16, 4, -16, 0, 0, 0 , 32, image, false );
-    scene.addGeometry(skyBox);
-  })
+
   var sphere1 = new Sphere(shaderNoTexture, 5, .7, 0, 30, 122, 120, 0);
   scene.addGeometry(sphere1);
-  var sphere2 = new Sphere(shaderNoTexture, 1, .7, 0, 30, 122, 120, 0);
+  var sphere2 = new Sphere(shaderNoTexture, 15, 2, 15, 30, 122, 120, 0);
   scene.addGeometry(sphere2);
+  var sphere3 = new Sphere(shaderNoTexture, 15, 2, 0, 30, 122, 120, 0);
+  scene.addGeometry(sphere3);
+  /*
+  inputHandler.readTexture("objs/wall256.png", function(image) {
+    var wallDraw = new tiltedCubes(shader, -2, 4, 0, 0, 0, 0, 1, image, true);
+    scene.addGeometry(wallDraw);
+    var wallDraw1 = new tiltedCubes(shader, -1, 4, 0, 0, 0, 0, 1, image, true);
+    scene.addGeometry(wallDraw1);
+    var wallDraw2 = new tiltedCubes(shader, -3, 4, 0, 0, 0, 0, 1, image, true);
+    scene.addGeometry(wallDraw2);
+    var wallDraw3 = new tiltedCubes(shader, -4, 4, 0, 0, 0, 0, 1, image, true);
+    scene.addGeometry(wallDraw3);
+  })
+*/
+  inputHandler.readTexture("objs/sky.jpg", function(image) {
+    var skyBox = new tiltedCubes(shader, -16, 14, -16, 0, 0, 0 , 32, image, false );
+    scene.addGeometry(skyBox);
+  })
   // Initialize renderer with scene and camera
   renderer = new Renderer(gl, scene, camera);
   renderer.start();

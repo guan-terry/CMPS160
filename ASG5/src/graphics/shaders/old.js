@@ -51,5 +51,5 @@ var OLD_FSHADER =
     vec3 specular = u_SpecularColor * v_Color.rgb * maxSquared;
     vec3 diffuse = u_DiffuseColor * v_Color.rgb * nDotL;
     vec3 ambient = u_AmbientColor * v_Color.rgb;
-    gl_FragColor = vec4(specular + diffuse + ambient, 1.0);
+    gl_FragColor = vec4(ambient + diffuse + specular, 1.0);
   }`;
