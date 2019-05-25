@@ -28,8 +28,11 @@ function main() {
   var idMatrix = new Matrix4();
   shader.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
 
-  scene.addGeometry(new square(shader, 0, -.8, 0, 1.0, 0.5, 0.0, 1.0, 1.0, null));
+
+  scene.addGeometry(new square(shader, 0, -.8, 0, 0, 1, 0, 1.0, 1.0, null));
+
   scene.addGeometry(new square(shader, -0.5, -.5, 0, 1.0, 0.0, 1.0, 0.1, 0.5, null));
+
   // Initialize renderer with scene and camera
   renderer = new Renderer(gl, scene, null);
   renderer.start();

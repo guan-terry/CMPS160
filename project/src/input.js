@@ -47,9 +47,16 @@ class InputHandler {
 
     keyDown(ev) {
       var keyName = event.key;
-      if (keyName == ' ') {
-        console.log(this.scene.geometries[1]);
+      if (keyName == ' ' && this.scene.geometries[1].modelMatrix.elements[13] <= 0) {
         this.scene.geometries[1].test();
+      } else if (keyName != 'm'){
+        this.scene.geometries[0].flashGround();
+        console.log(this.scene.geometries[0]);
+      }
+      if (keyName == 'm') {
+        var arrayHolder = [this.scene.geometries[0], this.scene.geometries[1]];
+        this.scene.clearGeometries();
+        this.scene.geometries = arrayHolder;
       }
     }
 
