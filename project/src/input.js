@@ -17,6 +17,7 @@ class InputHandler {
       _inputHandler = this;
 
       this.image = null;
+      this.jumpHold = 0;
 
       // Mouse Events
       this.canvas.onmousedown = function(ev) { _inputHandler.click(ev) };
@@ -25,6 +26,10 @@ class InputHandler {
       //Keyboard Events
       document.addEventListener('keydown', function(ev) {
         _inputHandler.keyDown(ev);
+      }, false);
+
+      document.addEventListener("keyup", function(ev) {
+        _inputHandler.keyup(ev);
       }, false);
 
       // Button Events
@@ -41,17 +46,30 @@ class InputHandler {
      */
     click(ev) {
         // Print x,y coordinates.
-        console.log(ev.clientX, ev.clientY);
+        //console.log(ev.clientX, ev.clientY);
 
+    }
+
+    keyup(ev) {
+      if (this.scene.geometries[1].modelMatrix.elements[13] <= 0.01) {
+        this.scene.geometries[1].test(this.jumpHold);
+        this.jumpHold = 0;
+      } else {
+        this.scene.geometries[0].flashGround();
+      }
     }
 
     keyDown(ev) {
       var keyName = event.key;
-      if (keyName == ' ' && this.scene.geometries[1].modelMatrix.elements[13] <= 0) {
-        this.scene.geometries[1].test();
+      if (keyName == ' ' && this.scene.geometries[1].modelMatrix.elements[13] <= 0.01) {
+        this.jumpHold += 15;
+        if (this.jumpHold >=60) {
+          this.jumpHold = 60;
+          this.scene.geometries[0].flashGround();
+        }
       } else if (keyName != 'm'){
         this.scene.geometries[0].flashGround();
-        console.log(this.scene.geometries[0]);
+        console.log(this.scene.geometries[1]);
       }
       if (keyName == 'm') {
         var arrayHolder = [this.scene.geometries[0], this.scene.geometries[1]];

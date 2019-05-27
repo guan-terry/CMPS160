@@ -49,8 +49,7 @@ class Renderer {
     this.timer++;
     if (this.timer == 90) {
       this.timer = 0;
-      console.log("print");
-      this.scene.addGeometry(new square(this.shaderProg, .9, -.5, 0, 0,0,1, .05, .25));
+      this.scene.addGeometry(new square(this.shaderProg, 1.1, -.5, 0, 0,0,1, .05, .25));
     }
     this.scene.checkGeometries();
 

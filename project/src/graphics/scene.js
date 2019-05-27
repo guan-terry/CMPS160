@@ -27,7 +27,7 @@ class Scene {
   //check each geometry and checks if the x degree is out of the screen
   checkGeometries() {
     for (var i = 2; i < this.geometries.length; i++) {
-      if (this.geometries[i].modelMatrix.elements[12] < -1.9) {
+      if (this.geometries[i].modelMatrix.elements[12] < -2.2) {
         this.removeGeometry(i);
       }
     }

@@ -24,12 +24,13 @@ class square extends Geometry {
       this.faces = {0: [0, 1, 2]};
       this.jumping = 0;
       this.flashTimer = 0;
+      this.jumpDuration = 0;
 
       this.translationMatrix = new Matrix4();
-      this.translationMatrix.setTranslate(0, .01, 0);
+      this.translationMatrix.setTranslate(0, .02, 0);
 
       this.negTranslationMatrix = new Matrix4();
-      this.negTranslationMatrix.setTranslate(0, -.01, 0);
+      this.negTranslationMatrix.setTranslate(0, -.02, 0);
 
       this.moveMatrix = new Matrix4();
       this.moveMatrix.setTranslate(-.03, 0, 0);
@@ -44,8 +45,9 @@ class square extends Geometry {
       this.interleaveVertices();
   }
 
-  test() {
+  test(jumpDuration) {
     this.jump = true;
+    this.jumpDuration = jumpDuration;
   }
 
   flashGround() {
@@ -80,8 +82,14 @@ class square extends Geometry {
        this.modelMatrix = this.modelMatrix.multiply(this.translationMatrix);
        this.jumping += 1;
      }
-     if (this.jumping == 30) {
+
+     if (this.jumping >= this.jumpDuration) {
        this.jump = false;
+     }
+
+     if (this.jumping != 0 && this.jump == false) {
+       this.modelMatrix = this.modelMatrix.multiply(this.negTranslationMatrix);
+       this.jumping -=1;
      }
 
      if (this.flash == true) {
@@ -107,10 +115,6 @@ class square extends Geometry {
        this.modelMatrix = this.modelMatrix.multiply(this.moveMatrix);
      }
 
-     if (this.jumping != 0 && this.jump == false) {
-       this.modelMatrix = this.modelMatrix.multiply(this.negTranslationMatrix);
-       this.jumping -=1;
-     }
 
       this.shader.setUniform("u_ModelMatrix", this.modelMatrix.elements);
 
