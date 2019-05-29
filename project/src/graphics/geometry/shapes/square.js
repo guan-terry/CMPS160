@@ -16,6 +16,7 @@ class square extends Geometry {
     super(shader);
 
     this.xSize = xSize;
+    this.ySize = ySize;
     this.image = image;
     this.jump = false;
     this.flash = false;

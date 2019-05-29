@@ -57,8 +57,8 @@ class Scene {
       var objectLeft = object.data[0];
       var objectTop = object.data[19];
 
-      if(object.modelMatrix.elements[12] < -1.4399 && player.modelMatrix.elements[13] < .2) {
-        console.log(this);
+      if(object.modelMatrix.elements[12] < -1.4399 && player.modelMatrix.elements[13] < .2 * object.ySize * 2 && object.modelMatrix.elements[12] > -1.6) {
+        console.log("collision");
       }
     }
 
