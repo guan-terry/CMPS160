@@ -47,11 +47,17 @@ class Renderer {
    */
   render() {
     this.timer++;
-    if (this.timer == 90) {
+    if (this.timer == 150) {
+      var random = Math.floor(Math.random() * 3) + 1;
+      console.log(random);
       this.timer = 0;
-      this.scene.addGeometry(new square(this.shaderProg, 1.1, -.5, 0, 0,0,1, .05, .25));
+        this.scene.addGeometry(new square(this.shaderProg, 1.0, -.6 + .1*random ,0 ,0 ,0, 1, .05, .5*random));
     }
+    //checks if the geometry is off the screen
     this.scene.checkGeometries();
+
+    //check if any geometry is touching the 2nd geometry
+    this.scene.isTouching();
 
     // Clear the geometry onscreen
     this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
