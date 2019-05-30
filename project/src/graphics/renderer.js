@@ -71,6 +71,7 @@ class Renderer {
     this.score = 0;
     this.draw2D(this.score, this.highScore);
     this.timer = -150;
+    this.scene.panic = 1;
   }
 
   /**

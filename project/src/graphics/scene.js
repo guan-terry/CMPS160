@@ -13,6 +13,7 @@ class Scene {
    */
   constructor() {
     this.geometries = []; // Geometries being drawn on canvas
+    this.panic = 1;
   }
 
   /**
@@ -43,6 +44,7 @@ class Scene {
   removeGeometry(i) {
     var afteri = this.geometries.slice(i + 1);
     this.geometries = [this.geometries[0], this.geometries[1]].concat(afteri);
+
   }
 
   /**
@@ -52,7 +54,7 @@ class Scene {
     var player = this.geometries[1];
     if (this.geometries[2] != null) {
       var object = this.geometries[2];
-      if(object.modelMatrix.elements[12] < -1.4399 && player.modelMatrix.elements[13] < .2 * object.ySize * 2 && object.modelMatrix.elements[12] > -1.6) {
+      if (object.modelMatrix.elements[12] < -1.4399 && player.modelMatrix.elements[13] < .2 * object.ySize * 2 && object.modelMatrix.elements[12] > -1.6) {
         return true;
       }
     }

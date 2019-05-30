@@ -76,7 +76,8 @@ class InputHandler {
       this.scene.geometries[0].flashGround();
       console.log(this.scene.geometries[1]);
     }
-    if (keyName == 'm') {
+    if (keyName == 'm' && this.scene.panic == 1) {
+      this.scene.panic -= 1;
       var arrayHolder = [this.scene.geometries[0], this.scene.geometries[1]];
       this.scene.clearGeometries();
       this.scene.geometries = arrayHolder;
