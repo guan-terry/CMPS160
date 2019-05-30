@@ -51,7 +51,12 @@ class InputHandler {
    */
   click(ev) {
     // Print x,y coordinates.
-    console.log(ev.clientX, ev.clientY);
+    var xClick = (ev.clientX - 208)/200;
+    var yClick = -(ev.clientY - 208)/200;
+    console.log(xClick, yClick);
+    if (yClick < -.6) {
+
+    }
 
   }
 

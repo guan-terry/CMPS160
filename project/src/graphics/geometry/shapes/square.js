@@ -20,6 +20,7 @@ class square extends Geometry {
     this.image = image;
     this.jump = false;
     this.flash = false;
+    this.flashData = [0,0,0];
 
     this.vertices = this.generateTriangleVertices(x, y, z, r, g, b, xSize, ySize);
     this.faces = {
@@ -93,10 +94,15 @@ class square extends Geometry {
     }
 
     if (this.flash == true) {
+      if (this.flashTimer == 0) {
+        this.flashData[0] = this.data[3];
+        this.flashData[1] = this.data[4];
+        this.flashData[2] = this.data[5];
+      }
       for (var i = 0; i < this.data.length; i += 9) {
-        this.data[i + 3] = 1;
-        this.data[i + 4] = 0;
-        this.data[i + 5] = 0;
+        this.data[i + 3] = 1-this.flashData[0];
+        this.data[i + 4] = 1-this.flashData[1];
+        this.data[i + 5] = 1-this.flashData[2];
       }
       this.flashTimer += 1;
     }
@@ -105,9 +111,9 @@ class square extends Geometry {
       this.flash = false;
       this.flashTimer = 0;
       for (var i = 0; i < this.data.length; i += 9) {
-        this.data[i + 3] = 0;
-        this.data[i + 4] = 1;
-        this.data[i + 5] = 0;
+        this.data[i + 3] = 1 - this.data[i+3];
+        this.data[i + 4] = 1 - this.data[i+4];
+        this.data[i + 5] = 1 - this.data[i+5];
       }
     }
 
