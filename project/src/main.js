@@ -1,19 +1,21 @@
 var shader = null;
 
 function main() {
-  // Retrieve the canvas from the HTML document
-  canvas = document.getElementById("webgl");
+  // Retrieve the canvas and hud from the HTML document
+  var canvas = document.getElementById("webgl");
+  var hud    = document.getElementById("hud");
 
   // Retrieve WebGL rendering context
   var gl = getWebGLContext(canvas);
-  if (!gl) {
+  var ctx = hud.getContext('2d');
+  if (!gl || !ctx) {
     console.log("Failed to get WebGL rendering context.");
     return;
   }
 
   // Initialize the scene
   var scene = new Scene();
-  var inputHandler = new InputHandler(canvas, scene);
+  var inputHandler = new InputHandler(canvas, scene, hud);
 
   // Initialize shader
   shader = new Shader(gl, ASG3_VSHADER, ASG3_FSHADER);
@@ -33,7 +35,8 @@ function main() {
 
   scene.addGeometry(new square(shader, -0.5, -.5, 0, 1.0, 0.0, 1.0, 0.1, 0.5, null));
 
+
   // Initialize renderer with scene and camera
-  renderer = new Renderer(gl, scene, null);
+  renderer = new Renderer(gl, scene, null, ctx);
   renderer.start();
 }

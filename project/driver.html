@@ -5,15 +5,11 @@
   </head>
 
   <body onload = "main()">
-    <canvas id="webgl" width="400" height="400">
+    <canvas id="webgl" width="400" height="400" style="position: absolute; z-index:0">
       Please use a browser that supports "canvas"
     </canvas>
-
-    <!-- Buttons to load and print file content -->
-    <br><br>
-    Select File: <input type="file" id="fileInput"/>
-    Select Texture: <input type="file" id="texInput"/>
-    <button type="button" id="fileLoad">Print file content</button>
+    <canvas id="hud" width="400" height="400" style="position: absolute; z-index:1">
+    </canvas>
 
     <!-- Example Slider -->
     <br><br>

@@ -14,11 +14,14 @@ class Renderer {
    * @constructor
    * @returns {Renderer} Renderer object created
    */
-  constructor(gl, scene, camera) {
+  constructor(gl, scene, camera, ctx) {
+    this.ctx = ctx;
     this.gl = gl;
     this.scene = scene;
     this.camera = camera;
     this.timer = 0;
+    this.score = 0;
+    this.highScore = 0;
     this.shaderProg = this.scene.geometries[0].shader;
 
     this.textures = {};
@@ -43,21 +46,52 @@ class Renderer {
   }
 
   /**
+   *  Draws the heads up display
+   */
+  draw2D(score, highScore) {
+    this.ctx.clearRect(0, 0, 400, 400);
+    this.ctx.font = '19px "Times New Roman"';
+    this.ctx.fillStyle = 'rgba(255,0,255, 1)';
+    this.ctx.fillText("Score: " + score, 0, 25);
+    this.ctx.fillText("High score: " + highScore, 0, 50);
+    if (this.timer < 0) {
+      this.ctx.fillStyle = 'rgba(50,255,120, 1)';
+      this.ctx.fillText("You're a loser", 150, 200);
+    }
+  }
+
+
+  /**
+   *  Simply stop the game and waits for user input.
+   */
+  gameOver() {
+    if (this.highScore < this.score) {
+      this.highScore = this.score;
+    }
+    this.score = 0;
+    this.draw2D(this.score, this.highScore);
+    this.timer = -150;
+  }
+
+  /**
    * Renders all the geometry within the scene.
    */
   render() {
     this.timer++;
     if (this.timer == 150) {
       var random = Math.floor(Math.random() * 3) + 1;
-      console.log(random);
       this.timer = 0;
-        this.scene.addGeometry(new square(this.shaderProg, 1.0, -.6 + .1*random ,0 ,0 ,0, 1, .05, .5*random));
+      this.scene.addGeometry(new square(this.shaderProg, 1.0, -.6 + .1 * random, 0, 0, 0, 1, .05, .5 * random));
+      this.score++;
     }
     //checks if the geometry is off the screen
     this.scene.checkGeometries();
 
     //check if any geometry is touching the 2nd geometry
-    this.scene.isTouching();
+    if (this.scene.isTouching()) {
+      this.gameOver();
+    }
+    //this.scene.isTouching();
 
     // Clear the geometry onscreen
     this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -86,7 +120,9 @@ class Renderer {
       this.sendVertexDataToGLSL(geometry.data, geometry.dataCounts, geometry.shader);
       this.sendIndicesToGLSL(geometry.indices);
 
-      this.drawBuffer(geometry.indices.length)
+      this.drawBuffer(geometry.indices.length);
+
+      this.draw2D(this.score, this.highScore);
     }
   }
 

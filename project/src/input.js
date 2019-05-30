@@ -10,7 +10,8 @@ class InputHandler {
   /**
    * Initializes the event handeling functions within the program.
    */
-  constructor(canvas, scene) {
+  constructor(canvas, scene, hud) {
+    this.hud = hud;
     this.canvas = canvas;
     this.scene = scene;
 
@@ -21,9 +22,8 @@ class InputHandler {
 
     // Mouse Events
     this.canvas.onmousedown = function(ev) {
-      _inputHandler.click(ev)
+      //_inputHandler.click(ev)
     };
-    this.canvas.onmousemove = function(ev) {};
 
     //Keyboard Events
     document.addEventListener('keydown', function(ev) {
@@ -34,14 +34,11 @@ class InputHandler {
       _inputHandler.keyup(ev);
     }, false);
 
-    // Button Events
-    document.getElementById('fileLoad').onclick = function() {
-      _inputHandler.readSelectedFile()
-    };
 
-    document.getElementById('texInput').onchange = function() {
-      _inputHandler.readTexture()
-    };
+
+    this.hud.onmousedown = function(ev) {
+      _inputHandler.click(ev);
+    }
 
     // HTML Slider Events
     document.getElementById('exampleSlider').addEventListener('mouseup', function() {
@@ -54,7 +51,7 @@ class InputHandler {
    */
   click(ev) {
     // Print x,y coordinates.
-    //console.log(ev.clientX, ev.clientY);
+    console.log(ev.clientX, ev.clientY);
 
   }
 
