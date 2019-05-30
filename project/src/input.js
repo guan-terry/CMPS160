@@ -14,6 +14,7 @@ class InputHandler {
     this.hud = hud;
     this.canvas = canvas;
     this.scene = scene;
+    this.object = null;
 
     _inputHandler = this;
 
@@ -40,22 +41,69 @@ class InputHandler {
       _inputHandler.click(ev);
     }
 
-    // HTML Slider Events
-    document.getElementById('exampleSlider').addEventListener('mouseup', function() {
-      console.log(this.value);
+    // HTML slider events for objects
+    document.getElementById('redSlider').addEventListener('mouseup', function() {
+      _inputHandler.changeRedColor(this.value / 255);
     });
+    document.getElementById('greenSlider').addEventListener('mouseup', function() {
+      _inputHandler.changeGreenColor(this.value / 255);
+    })
+    document.getElementById('blueSlider').addEventListener('mouseup', function() {
+      _inputHandler.changeBlueColor(this.value / 255);
+    })
+
+    // HTML slider events for the moving blocks
   }
+
+  /**
+   *  Changes the color of the specificed object when the red slider
+   *  is changed
+   *
+   */
+  changeRedColor(blueSliderVal) {
+    if (this.object != null) {
+      for (var i = 0; i < this.object.data.length; i += 9) {
+        this.object.data[i + 3] = blueSliderVal;
+      }
+    }
+  }
+
+  /**
+   *  Changes the color of the specified object when the green slider
+   *  is changed
+   */
+  changeGreenColor(greenSliderVal) {
+    if (this.object != null) {
+      for (var i = 0; i < this.object.data.length; i += 9) {
+        this.object.data[i + 4] = greenSliderVal;
+      }
+    }
+  }
+
+  /**
+   *  Changes the color of the specefied object when the blue Slider
+   *  is changed
+   */
+   changeBlueColor(blueSliderVal) {
+     if (this.object != null) {
+       for (var i = 0; i< this.object.data.length; i+=9) {
+         this.object.data[i+5] = blueSliderVal;
+       }
+     }
+   }
 
   /**
    * Function called upon mouse click.
    */
   click(ev) {
     // Print x,y coordinates.
-    var xClick = (ev.clientX - 208)/200;
-    var yClick = -(ev.clientY - 208)/200;
+    var xClick = (ev.clientX - 208) / 200;
+    var yClick = -(ev.clientY - 208) / 200;
     console.log(xClick, yClick);
     if (yClick < -.6) {
-
+      this.object = this.scene.geometries[0];
+    } else if (yClick > -.6 && yClick < -.4 && xClick > -.6 && xClick < -.4) {
+      this.object = this.scene.geometries[1];
     }
 
   }

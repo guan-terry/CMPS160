@@ -30,9 +30,9 @@ function main() {
   var idMatrix = new Matrix4();
   shader.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
 
-
+                                    // x    y  z  r  g  b  xSize ySize image
   scene.addGeometry(new square(shader, 0, -.8, 0, 0, 1, 0, 1.0, 1.0, null));
-
+                                      // x    y   z  r     g   b   xSize ySize image
   scene.addGeometry(new square(shader, -0.5, -.5, 0, 1.0, 0.0, 1.0, 0.1, 0.5, null));
 
 
