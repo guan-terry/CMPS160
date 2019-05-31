@@ -37,7 +37,7 @@ function main() {
   shaderTexture.addUniform("u_Sampler"< "sampler2D", 0);
   shaderTexture.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
   var user;
-  //user = new square(shader, -0.5, -.5, 0, 1.0, 0.0, 1.0, 0.1, 0.5, null);
+  user = new square(shader, -0.5, -.5, 0, 1.0, 0.0, 1.0, 0.1, 0.5, null);
   inputHandler.readTexture("objs/sky.jpg", function(image) {
     scene.addGeometry(new square(shaderTexture, -0.5, -.5, 0, 1.0, 0.0, 1.0, 0.1, 0.5, image));
   })
