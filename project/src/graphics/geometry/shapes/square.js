@@ -22,6 +22,7 @@ class square extends Geometry {
     this.flash = false;
     this.flashData = [0,0,0];
 
+
     this.vertices = this.generateTriangleVertices(x, y, z, r, g, b, xSize, ySize);
     this.faces = {
       0: [0, 1, 2]
@@ -61,6 +62,16 @@ class square extends Geometry {
     var vertex1 = new Vertex(x + 1 * xSize, y - .2 * ySize, z, r, g, b);
     var vertex2 = new Vertex(x - 1 * xSize, y + .2 * ySize, z, r, g, b);
     var vertex3 = new Vertex(x + 1 * xSize, y + .2 * ySize, z, r, g, b);
+    if (this.image != null) {
+      vertex0.texCoord[0] = 0.0;
+      vertex0.texCoord[1] = 0.0;
+      vertex1.texCoord[0] = 1.0;
+      vertex1.texCoord[1] = 0.0;
+      vertex2.texCoord[0] = 0.0;
+      vertex2.texCoord[1] = 1.0;
+      vertex3.texCoord[0] = 1.0;
+      vertex3.texCoord[1] = 1.0;
+    }
 
     //left bottom
     vertices.push(vertex0);

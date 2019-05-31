@@ -203,24 +203,24 @@ class InputHandler {
     }
   }
 
-  readTexture() {
+  readTexture(src, onTexLoad) {
     // Create the image object
-    var image = new Image();
-    if (!image) {
-      console.log('Failed to create the image object');
-      return false;
-    }
+    // Create the image object
+     var image = new Image();
+     if (!image) {
+       console.log('Failed to create the image object');
+       return false;
+     }
 
-    // Register the event handler to be called on loading an image
-    image.onload = function() {
-      _inputHandler.image = image;
-    };
+     // Register the event handler to be called on loading an image
+     image.onload = function() {
+       _inputHandler.image = image;
+       onTexLoad(image);
+     };
 
-    var imgPath = document.getElementById("texInput").value;
-    var imgPathSplit = imgPath.split("\\");
+     // Tell the browser to load an image
+     image.src = src;
+     return true;
 
-    // Tell the browser to load an image
-    image.src = 'objs/' + imgPathSplit[imgPathSplit.length - 1];
-    return true;
   }
 }
