@@ -1,44 +1,51 @@
 <html lang="en">
-  <head>
-      <meta charset="utf-8"/>
-      <title> CMPS160 Lab 3 Intro </title>
-  </head>
 
-  <body onload = "main()">
-    <canvas id="webgl" width="400" height="400" style="position: absolute; z-index:0">
-      Please use a browser that supports "canvas"
-    </canvas>
-    <canvas id="hud" width="400" height="400" style="position: absolute; z-index:1">
-    </canvas>
+<head>
+  <meta charset="utf-8" />
+  <title> CMPS160 Lab 3 Intro </title>
+</head>
 
-    <!-- Example Slider -->
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br>
-    red: <input type="range" min="0" max="255" value="0" class="slider" id="redSlider">
-    green: <input type="range" min="0" max="255" value="255" class="slider" id="greenSlider">
-    blue: <input type="range" min="0" max="255" value="0" class="slider" id="blueSlider">
+<body onload="main()">
+  <canvas id="webgl" width="400" height="400" style="position: absolute; z-index:0">
+    Please use a browser that supports "canvas"
+  </canvas>
+  <canvas id="hud" width="400" height="400" style="position: absolute; z-index:1">
+  </canvas>
 
-    <!-- Include external libs -->
-    <script src = "lib/webgl-utils.js"></script>
-    <script src = "lib/webgl-render.js"></script>
-    <script src = "lib/webgl-debug.js"></script>
-    <script src = "lib/webgl-loader.js"></script>
-    <script src = "lib/cuon-utils.js"></script>
-    <script src = "lib/cuon-matrix.js"></script>
+  <!-- Example Slider -->
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br><br>
+  red:   <input type="range" min="0" max="255" value="0" class="slider" id="redSlider">
+  green: <input type="range" min="0" max="255" value="255" class="slider" id="greenSlider">
+  blue:  <input type="range" min="0" max="255" value="0" class="slider" id="blueSlider">
 
-    <!-- Include shaders -->
-    <script src = "src/graphics/shaders/shader.js"></script>
-    <script src = "src/graphics/shaders/asg3.js"></script>
+  <br> For walls: <br>
+  red:  <input type="range" min="0" max="255" value="0" class="slider" id="redWalls">
+  green:<input type="range" min="0" max="255" value="0" class="slider" id="greenWalls">
+  blue: <input type="range" min="0" max="255" value="255" class="slider" id="blueWalls">
 
-    <!-- Include Base code -->
-    <script src = "src/graphics/geometry/vertex.js"></script>
-    <script src = "src/graphics/geometry/geometry.js"></script>
-    <script src = "src/graphics/geometry/shapes/triangle.js"></script>
-    <script src = "src/graphics/geometry/shapes/custom.js"></script>
-    <script src = "src/graphics/geometry/shapes/square.js"></script>
-    <script src = "src/graphics/renderer.js"></script>
-    <script src = "src/graphics/scene.js"></script>
-    <script src = "src/main.js"></script>
-    <script src = "src/input.js"></script>
-  </body>
+  <!-- Include external libs -->
+  <script src="lib/webgl-utils.js"></script>
+  <script src="lib/webgl-render.js"></script>
+  <script src="lib/webgl-debug.js"></script>
+  <script src="lib/webgl-loader.js"></script>
+  <script src="lib/cuon-utils.js"></script>
+  <script src="lib/cuon-matrix.js"></script>
+
+  <!-- Include shaders -->
+  <script src="src/graphics/shaders/shader.js"></script>
+  <script src="src/graphics/shaders/asg3.js"></script>
+
+  <!-- Include Base code -->
+  <script src="src/graphics/geometry/vertex.js"></script>
+  <script src="src/graphics/geometry/geometry.js"></script>
+  <script src="src/graphics/geometry/shapes/triangle.js"></script>
+  <script src="src/graphics/geometry/shapes/custom.js"></script>
+  <script src="src/graphics/geometry/shapes/square.js"></script>
+  <script src="src/graphics/renderer.js"></script>
+  <script src="src/graphics/scene.js"></script>
+  <script src="src/main.js"></script>
+  <script src="src/input.js"></script>
+</body>
+
 </html>

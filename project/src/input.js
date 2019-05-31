@@ -53,6 +53,54 @@ class InputHandler {
     })
 
     // HTML slider events for the moving blocks
+    document.getElementById('redWalls').addEventListener('mouseup', function() {
+      _inputHandler.changeRedWall(this.value / 255);
+    });
+    document.getElementById('greenWalls').addEventListener('mouseup', function() {
+      _inputHandler.changeGreenWall(this.value / 255);
+    })
+    document.getElementById('blueWalls').addEventListener('mouseup', function() {
+      _inputHandler.changeBlueWall(this.value / 255);
+    })
+  }
+
+  /**
+   *  Changes the color of the wall when the blue Slider
+   *  is changed
+   */
+  changeBlueWall(blueSliderVal) {
+    if (this.scene.geometries[2] != null) {
+      for (var i = 0; i < this.scene.geometries[2].data.length; i += 9) {
+        this.scene.geometries[2].data[i + 5] = blueSliderVal;
+      }
+    }
+    this.scene.blueVal = blueSliderVal;
+  }
+
+  /**
+   *  Changes the color of the wall when the blue Slider
+   *  is changed
+   */
+  changeRedWall(redSliderVal) {
+    if (this.scene.geometries[2] != null) {
+      for (var i = 0; i < this.scene.geometries[2].data.length; i += 9) {
+        this.scene.geometries[2].data[i + 3] = redSliderVal;
+      }
+    }
+    this.scene.redVal = redSliderVal;
+  }
+
+  /**
+   *  Changes the color of the wall when the blue Slider
+   *  is changed
+   */
+  changeGreenWall(greenSliderVal) {
+    if (this.scene.geometries[2] != null) {
+      for (var i = 0; i < this.scene.geometries[2].data.length; i += 9) {
+        this.scene.geometries[2].data[i + 4] = greenSliderVal;
+      }
+    }
+    this.scene.greenVal = greenSliderVal;
   }
 
   /**
@@ -84,13 +132,13 @@ class InputHandler {
    *  Changes the color of the specefied object when the blue Slider
    *  is changed
    */
-   changeBlueColor(blueSliderVal) {
-     if (this.object != null) {
-       for (var i = 0; i< this.object.data.length; i+=9) {
-         this.object.data[i+5] = blueSliderVal;
-       }
-     }
-   }
+  changeBlueColor(blueSliderVal) {
+    if (this.object != null) {
+      for (var i = 0; i < this.object.data.length; i += 9) {
+        this.object.data[i + 5] = blueSliderVal;
+      }
+    }
+  }
 
   /**
    * Function called upon mouse click.

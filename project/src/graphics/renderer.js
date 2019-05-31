@@ -82,7 +82,7 @@ class Renderer {
     if (this.timer == 150) {
       var random = Math.floor(Math.random() * 3) + 1;
       this.timer = 0;
-      this.scene.addGeometry(new square(this.shaderProg, 1.0, -.6 + .1 * random, 0, 0, 0, 1, .05, .5 * random));
+      this.scene.addGeometry(new square(this.shaderProg, 1.0, -.6 + .1 * random, 0, this.scene.redVal, this.scene.greenVal, this.scene.blueVal, .05, .5 * random));
       this.score++;
     }
     //checks if the geometry is off the screen

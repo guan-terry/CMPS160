@@ -14,6 +14,9 @@ class Scene {
   constructor() {
     this.geometries = []; // Geometries being drawn on canvas
     this.panic = 1;
+    this.redVal = 0;
+    this.greenVal = 0;
+    this.blueVal = 1;
   }
 
   /**
