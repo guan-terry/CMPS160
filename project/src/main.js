@@ -13,10 +13,17 @@ function main() {
     console.log("Failed to get WebGL rendering context.");
     return;
   }
+  var camera = new Camera();
+  var light = new Light(-0.5, -0.5, 0.5);
+
+
 
   // Initialize the scene
   var scene = new Scene();
   var inputHandler = new InputHandler(canvas, scene, hud);
+
+  scene.setLight(light);
+
 
   // Initialize shader
   shader = new Shader(gl, ASG3_VSHADER, ASG3_FSHADER);
@@ -26,17 +33,29 @@ function main() {
   shader.addAttribute("a_Position");
   shader.addAttribute("a_Color");
   shader.addAttribute("a_TexCoord");
+  shader.addUniform("u_EyeVector", "vec3", new Vector3());
+  shader.addUniform("u_SpecularColor", "vec3", new Vector3());
+  shader.addUniform("u_DiffuseColor", "vec3", new Vector3());
+  shader.addUniform("u_AmbientColor", "vec3", new Vector3());
+  shader.addUniform("u_LightPosition", "vec3", new Vector3());
+  shader.addUniform("u_Normal", "vec3", new Vector3());
+
   shaderTexture.addAttribute("a_Position");
   shaderTexture.addAttribute("a_Color");
   shaderTexture.addAttribute("a_TexCoord");
+  shaderTexture.addUniform("u_EyeVector", "vec3", new Vector3());
+  shaderTexture.addUniform("u_SpecularColor", "vec3", new Vector3());
+  shaderTexture.addUniform("u_DiffuseColor", "vec3", new Vector3());
+  shaderTexture.addUniform("u_AmbientColor", "vec3", new Vector3());
+  shaderTexture.addUniform("u_LightPosition", "vec3", new Vector3());
+  shaderTexture.addUniform("u_Normal", "vec3", new Vector3());
 
   // Add uniforms
   shader.addUniform("u_Sampler", "sampler2D", 0);
   var idMatrix = new Matrix4();
   shader.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
-  shaderTexture.addUniform("u_Sampler"< "sampler2D", 0);
+  shaderTexture.addUniform("u_Sampler", "sampler2D", 0);
   shaderTexture.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
-  var user;
   user = new square(shader, -0.5, -.5, 0, 1.0, 0.0, 1.0, 0.1, 0.5, null);
   inputHandler.readTexture("objs/sky.jpg", function(image) {
     scene.addGeometry(new square(shaderTexture, -0.5, -.5, 0, 1.0, 0.0, 1.0, 0.1, 0.5, image));
@@ -45,10 +64,10 @@ function main() {
                                     // x    y  z  r  g  b  xSize ySize image
   scene.addGeometry(new square(shader, 0, -.8, 0, 0, 1, 0, 1.0, 1.0, null));
                                       // x    y   z  r     g   b   xSize ySize image
-  //scene.addGeometry(user);
+
 
 
   // Initialize renderer with scene and camera
-  renderer = new Renderer(gl, scene, null, ctx);
+  renderer = new Renderer(gl, scene, camera, ctx);
   renderer.start();
 }

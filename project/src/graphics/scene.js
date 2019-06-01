@@ -19,6 +19,13 @@ class Scene {
     this.blueVal = 1;
   }
 
+
+  setLight(light) {
+    this.light = light;
+  }
+
+
+
   /**
    * Adds the given geometry to the the scene.
    *

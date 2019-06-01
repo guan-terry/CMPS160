@@ -102,7 +102,20 @@ class Renderer {
 
       // Switch to shader attached to geometry
       this.gl.useProgram(geometry.shader.program)
-      this.gl.program = geometry.shader.program
+      this.gl.program = geometry.shader.program;
+
+      geometry.shader.setUniform("u_EyeVector", [this.camera.viewMatrix.elements[0], this.camera.viewMatrix.elements[1], this.camera.viewMatrix.elements[2]]);
+      geometry.shader.setUniform("u_Normal", [0, 0, 1]);
+
+
+      if (this.scene.light != null) {
+        geometry.shader.setUniform("u_DiffuseColor", this.scene.light.diffuse);
+        geometry.shader.setUniform("u_AmbientColor", this.scene.light.ambient);
+        geometry.shader.setUniform("u_LightPosition", this.scene.light.pos.elements);
+        geometry.shader.setUniform("u_SpecularColor", this.scene.light.specular);
+      }
+
+
 
       // Callback function in the case user wants to change the
       // geometry before the draw call
