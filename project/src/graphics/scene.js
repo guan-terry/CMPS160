@@ -61,7 +61,7 @@ class Scene {
    *  Checks if the outcomming object is touching the player
    */
   isTouching() {
-    var player = this.geometries[1];
+    var player = this.geometries[0];
     if (this.geometries[2] != null) {
       var object = this.geometries[2];
       if (object.modelMatrix.elements[12] < -1.4399 && player.modelMatrix.elements[13] < .2 * object.ySize * 2 && object.modelMatrix.elements[12] > -1.6) {
