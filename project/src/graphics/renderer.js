@@ -14,7 +14,7 @@ class Renderer {
    * @constructor
    * @returns {Renderer} Renderer object created
    */
-  constructor(gl, scene, camera, ctx) {
+  constructor(gl, scene, camera, ctx, shader) {
     this.ctx = ctx;
     this.gl = gl;
     this.scene = scene;
@@ -22,7 +22,7 @@ class Renderer {
     this.timer = 0;
     this.score = 0;
     this.highScore = 0;
-    this.shaderProg = this.scene.geometries[0].shader;
+    this.shaderProg = shader;
 
     this.textures = {};
 
@@ -49,14 +49,15 @@ class Renderer {
    *  Draws the heads up display
    */
   draw2D(score, highScore) {
-    this.ctx.clearRect(0, 0, 400, 400);
+    this.ctx.clearRect(0, 0, 800, 600);
     this.ctx.font = '19px "Times New Roman"';
     this.ctx.fillStyle = 'rgba(255,0,255, 1)';
-    this.ctx.fillText("Score: " + score, 0, 25);
-    this.ctx.fillText("High score: " + highScore, 0, 50);
+    this.ctx.fillText("Score: " + score, 7.5, 25);
+    this.ctx.fillText("High score: " + highScore, 7.5, 50);
     if (this.timer < 0) {
-      this.ctx.fillStyle = 'rgba(50,255,120, 1)';
-      this.ctx.fillText("You're a loser", 150, 200);
+      this.ctx.font = '30px "Times New Roman"';
+      this.ctx.fillStyle = 'rgba(255,0,0, 1)';
+      this.ctx.fillText("You're a loser", 325, 300);
     }
   }
 
@@ -126,8 +127,8 @@ class Renderer {
         if (!(geometry.image.src in this.textures)) {
           // Create a texture object and store id using its path as key
           this.textures[geometry.image.src] = this.gl.createTexture();
-          this.loadTexture(this.textures[geometry.image.src], geometry.image);
         }
+          this.loadTexture(this.textures[geometry.image.src], geometry.image);
       }
 
       // Draw geometry

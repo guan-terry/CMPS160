@@ -4,11 +4,12 @@ var shaderTexture = null;
 function main() {
   // Retrieve the canvas and hud from the HTML document
   var canvas = document.getElementById("webgl");
-  var hud    = document.getElementById("hud");
+  var hud = document.getElementById("hud");
 
   // Retrieve WebGL rendering context
   var gl = getWebGLContext(canvas);
   var ctx = hud.getContext('2d');
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   if (!gl || !ctx) {
     console.log("Failed to get WebGL rendering context.");
     return;
@@ -56,18 +57,22 @@ function main() {
   shader.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
   shaderTexture.addUniform("u_Sampler", "sampler2D", 0);
   shaderTexture.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
-  user = new square(shader, -0.5, -.5, 0, 1.0, 0.0, 1.0, 0.1, 0.5, null);
-  inputHandler.readTexture("objs/sky.jpg", function(image) {
-    scene.addGeometry(new square(shaderTexture, -0.5, -.5, 0, 1.0, 0.0, 1.0, 0.1, 0.5, image));
+
+  inputHandler.readTexture("img/bird.jpg", function(img) {
+    scene.addGeometry(new square(shaderTexture, -0.5, -.5, 0, 1.0, 0.0, 1.0, 0.1, 0.5, img));
   })
+
+
+  inputHandler.readTexture("img/ground.jpg", function(image) {
+    scene.addGeometry(new square(shaderTexture, 0, -.8, 0, 0, 1, 0, 1.0, 1.0, image));
+  })
+
   //console.log(user);
-                                    // x    y  z  r  g  b  xSize ySize image
-  scene.addGeometry(new square(shader, 0, -.8, 0, 0, 1, 0, 1.0, 1.0, null));
-                                      // x    y   z  r     g   b   xSize ySize image
+  //scene.addGeometry(new square(shader, 0, -.8, 0, 0, 1, 0, 1.0, 1.0, null));
 
 
 
   // Initialize renderer with scene and camera
-  renderer = new Renderer(gl, scene, camera, ctx);
+  renderer = new Renderer(gl, scene, camera, ctx, shader);
   renderer.start();
 }

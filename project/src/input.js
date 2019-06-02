@@ -145,36 +145,37 @@ class InputHandler {
    */
   click(ev) {
     // Print x,y coordinates.
-    var xClick = (ev.clientX - 208) / 200;
-    var yClick = -(ev.clientY - 208) / 200;
+    var rect = canvas.getBoundingClientRect();
+    var xClick = ev.clientX - rect.left;
+    var yClick = ev.clientY - rect.top;
     console.log(xClick, yClick);
-    if (yClick < -.6) {
-      this.object = this.scene.geometries[0];
-    } else if (yClick > -.6 && yClick < -.4 && xClick > -.6 && xClick < -.4) {
+    if (yClick > 480) {
       this.object = this.scene.geometries[1];
+    } else if (yClick < 480 && yClick > 420 && xClick > 160 && xClick < 227) {
+      this.object = this.scene.geometries[0];
     }
 
   }
 
   keyup(ev) {
-    if (this.scene.geometries[1].modelMatrix.elements[13] <= 0.01) {
-      this.scene.geometries[1].test(this.jumpHold);
+    if (this.scene.geometries[0].modelMatrix.elements[13] <= 0.01) {
+      this.scene.geometries[0].test(this.jumpHold);
       this.jumpHold = 0;
     } else {
-      this.scene.geometries[0].flashGround();
+      this.scene.geometries[1].flashGround();
     }
   }
 
   keyDown(ev) {
     var keyName = event.key;
-    if (keyName == ' ' && this.scene.geometries[1].modelMatrix.elements[13] <= 0.01) {
+    if (keyName == 'l' || keyName == ' ' && this.scene.geometries[1].modelMatrix.elements[13] <= 0.01) {
       this.jumpHold += 14;
       if (this.jumpHold >= 42) {
         this.jumpHold = 42;
-        this.scene.geometries[0].flashGround();
+        this.scene.geometries[1].flashGround();
       }
     } else if (keyName != 'm') {
-      this.scene.geometries[0].flashGround();
+      //this.scene.geometries[0].flashGround();
       console.log(this.scene.geometries[1]);
     }
     if (keyName == 'm' && this.scene.panic == 1) {

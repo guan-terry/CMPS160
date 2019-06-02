@@ -3,26 +3,161 @@
 <head>
   <meta charset="utf-8" />
   <title> Project </title>
+  <link rel="stylesheet" type="text/css" href="driver.css" />
 </head>
+<body>
+  <font size="20px"><b><center>BIRD JUMP</center></b></font>
+  <br>
+</body>
 
+<div id="canvas">
 <body onload="main()">
-  <canvas id="webgl" width="400" height="400" style="position: absolute; z-index:0">
+  <canvas id="webgl" width="800" height="600" style="position: absolute; z-index:0">
     Please use a browser that supports "canvas"
   </canvas>
-  <canvas id="hud" width="400" height="400" style="position: absolute; z-index:1">
-  </canvas>
+  <canvas id="hud" width="800" height="600" style="position: absolute; z-index:0"></canvas>
+</div>
 
   <!-- Example Slider -->
   <br><br><br><br><br><br><br><br><br><br><br>
   <br><br><br><br><br><br><br><br><br><br><br><br>
-  red:   <input type="range" min="0" max="255" value="0" class="slider" id="redSlider">
-  green: <input type="range" min="0" max="255" value="255" class="slider" id="greenSlider">
-  blue:  <input type="range" min="0" max="255" value="0" class="slider" id="blueSlider">
+  <br><br><br><br><br><br><br><br><br><br><br>
 
-  <br> For walls: <br>
-  red:  <input type="range" min="0" max="255" value="0" class="slider" id="redWalls">
-  green:<input type="range" min="0" max="255" value="0" class="slider" id="greenWalls">
-  blue: <input type="range" min="0" max="255" value="255" class="slider" id="blueWalls">
+
+
+    <div id="sliders"><br> Change ground color: <br></div>
+    <center>
+    <font color = "red">red:</font>   <input type="range" min="0" max="255" value="0" class="slider" id="redSlider">
+    <font color = "green">green:</font> <input type="range" min="0" max="255" value="255" class="slider" id="greenSlider">
+    <font color = "blue">blue:</font>  <input type="range" min="0" max="255" value="0" class="slider" id="blueSlider">
+    </center>
+
+    <div id="sliders"><br> Change wall color: <br></div>
+    <center>
+    <font color = "red">red:</font>  <input type="range" min="0" max="255" value="0" class="slider" id="redWalls">
+    <font color = "green">green:</font>  <input type="range" min="0" max="255" value="0" class="slider" id="greenWalls">
+    <font color = "blue">blue:</font> <input type="range" min="0" max="255" value="255" class="slider" id="blueWalls">
+    </center>
+  <br><br>
+  <center><b><font size="16">Instructions</font></b></center>
+  <div id="overview">
+    -Use sliders to select colors for ground and/or blocks
+    <br>
+    -(Space bar) - to charge a jump
+    <br>
+    -(M) - clear obstacles on current canvas
+  </div>
+
+  <center><b><font size="16">Gameplay</font></b></center>
+  <div id="video">
+  </div>
+
+
+
+
+  <center><b><font size="16">Overview</font></b></center>
+  <div id="overview">
+      A player will be on an endless map trying to survive as long as they can.
+      The goal is to jump over the blocks which are at random size. The more blocks
+      the player jumps over, the higher the score will be. The score is accumulated
+      by the number of blocks the player jumps over per round. Good Luck!!!
+  </div>
+
+  <center><b><font size="16">Interactive Features</font></b></center>
+
+  <br>
+
+  <div id="pictures">
+    <center><img src="img/features/interactive_spacebar.jpg" height="400px"; width="600px";></center>
+  </div>
+  <div id="text">
+    <p>(Space bar) – User will hold down the space bar to charge a single jump.
+      The longer the user holds down the space bar, the higher the jump will be.
+    </p>
+  </div>
+
+  <div id="pictures">
+    <center><img src="img/features/interactive_blink.gif" height="400px"; width="600px"></center>
+  </div>
+  <div id="text">
+    <p>If the user holds the space bar for more than 3 seconds, the bottom of the
+    canvas will start flashing a color giving the user a warning that the jump
+    charge has reached its maximum capacity.</p>
+  </div>
+
+  <div id="pictures">
+    <center><img src="img/features/interactive_clear.jpg" height="400px"; width="600px"></center>
+  </div>
+  <div id="text">
+    <p>(M) – The user will be granted a one-time power up in the game. When the
+       user is wants to, the user has the ability to press M and this will clear
+        all the blocks on the current canvas screen.</p>
+  </div>
+
+  <br>
+  <center><b><font size="16">Advanced Methods</font></b></center>
+  <br>
+
+  <div id="pictures">
+    <center><img src="img/features/advance_color.jpg" height="400px"; width="600px"></center>
+  </div>
+  <div id="text">
+    <p>(Color Picking) – The user will have the ability to change its own color
+       into any color the user desires when the user clicks on the square itself.
+       The user will also have the ability to change the color of the ground into
+        any color when clicking on it. There is a slider that allows the user
+        to change either itself or the ground. There is also another separate
+        slider that allows the user to change the blocks moving through the
+        canvas. </p>
+  </div>
+
+  <div id="pictures">
+    <center><img src="img/features/advance_hud.jpg" height="400px"; width="600px"></center>
+  </div>
+  <div id="text">
+    <p>(Heads-up Display) – During the game we plan to have 2 heads up display.
+       At the top left corner, we will be displaying 2 things. As the game is
+       running, the user will be allowed to see their current score based on the
+       number of blocks they’ve jumped over. Also there will be a target score
+       in which it keeps track of the users highest score achieved throughout
+       the many games the user has played. As a result, the user will not have to
+       take its eyes off the canvas during the game when trying to achieve a
+       high score.</p>
+  </div>
+
+  <div id="pictures">
+    <center><img src="img/features/advance_collision.jpg" height="400px"; width="600px"></center>
+  </div>
+  <div id="text">
+    <p>(Collision Detection) – As the user crashes into a block, the game will
+      end. The user as one object, and the blocks as another object. When these
+      two objects have collided, there will be a pop up saying "You're a loser",
+      and the total score will appear at the top left. Momentarily, the game will
+      start again, and the user will have a chance to beat its own score.</p>
+  </div>
+
+  <div id="pictures">
+    <center><img src="img/features/advance_phong.jpg" height="400px"; width="600px"></center>
+  </div>
+  <div id="text">
+    <p>(Phong Shader) – As the user jumps up and down, there will be a different
+    aspect of color depending on the height of the user. As the user jumps, the
+    amount of light would intensify. Also the ground has a lighting in which the
+    higher up the ground is, the gradient would intensify. </p>
+  </div>
+
+  <div id="overview">
+    <p>The assignment was used from part of assignment 4's base code. We decided to
+    change up the 3d world into a 2d world. As a result, a lot of things had to be
+    modified. Rather than implementing an array of blocks, we decided to take the
+    approach of loading in random blocks using Math.random. Texturing the user is
+    also another thing we've implemented. Using the advanced methods and interactive
+    features, we created an endless running canvas which makes up this game, "BIRD JUMP".</p>
+
+  </div>
+
+  <b><center><p> Created by Jeffrey Yeung and Terry Guan </p></center></b>
+
 
   <!-- Include external libs -->
   <script src="lib/webgl-utils.js"></script>
